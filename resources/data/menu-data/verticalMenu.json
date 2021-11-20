@@ -1,0 +1,189 @@
+{
+    "menu": [
+        {
+            "navheader" : "Dashboard",
+            "permission": "dashboard_header_access"
+        },
+        {
+            "url": "admin.home",
+            "name": "global.dashboard",
+            "permission": "dashboard_access",
+            "icon": "home",
+            "slug": "admin.home"
+        },
+        {
+            "name": "cruds.userManagement.title",
+            "icon": "users",
+            "permission": "user_management_access",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "admin.permissions.index",
+                    "name": "cruds.permission.title",
+                    "icon": "circle",
+                    "slug": "admin.permissions.index",
+                    "permission": "permission_access"
+                },
+                {
+                    "url": "admin.roles.index",
+                    "name": "cruds.role.title",
+                    "icon": "circle",
+                    "slug": "admin.roles.index",
+                    "permission": "role_access"
+                },
+                {
+                    "url": "admin.users.index",
+                    "name": "cruds.user.title",
+                    "icon": "circle",
+                    "slug": "admin.users.index",
+                    "permission": "user_access"
+                }
+            ]
+        },
+        {
+            "name": "Position",
+            "icon": "users",
+            "permission": "position_access",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "admin.positions.index",
+                    "name": "cruds.position.title",
+                    "icon": "circle",
+                    "slug": "admin.positions.index",
+                    "permission": "position_access"
+                },
+                {
+                    "url": "admin.human-resources.index",
+                    "name": "cruds.humanResource.title",
+                    "icon": "circle",
+                    "slug": "admin.human-resources.index",
+                    "permission": "human_resource_access"
+                }
+            ]
+        },
+        {
+            "name": "cruds.risk.title",
+            "icon": "alert-circle",
+            "permission": "risk_access",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "admin.risks.index",
+                    "name": "cruds.risk.title",
+                    "icon": "circle",
+                    "slug": "admin.risks.index",
+                    "permission": "risk_access"
+                }
+            ]
+        },
+        {
+            "name": "Risk SMAP",
+            "icon": "users",
+            "permission": "atp_process_access",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "admin.business-partner-documents.index",
+                    "name": "Document Management",
+                    "icon": "circle",
+                    "slug": "admin.business-partner-documents.index",
+                    "permission": "business_partner_identification_access"
+                },
+                {
+                    "url": "admin.atp-processes.index",
+                    "name": "cruds.atpProcess.title",
+                    "icon": "circle",
+                    "slug": "admin.atp-processes.index",
+                    "permission": "atp_process_access"
+                },
+                {
+                    "name": "cruds.businessPartnerIdentification.title",
+                    "icon": "users",
+                    "permission": "business_partner_identification_access",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "admin.business-partners.index",
+                            "name": "cruds.businessPartner.title",
+                            "icon": "circle",
+                            "slug": "admin.business-partners.index",
+                            "permission": "business_partner_access"
+                        },
+                        {
+                            "url": "admin.business-partner-identifications.index",
+                            "name": "cruds.businessPartnerIdentification.title",
+                            "icon": "circle",
+                            "slug": "admin.business-partner-identifications.index",
+                            "permission": "business_partner_identification_access"
+                        }
+                    ]
+                },
+                {
+                    "name": "cruds.analysisProcess.title",
+                    "icon": "users",
+                    "permission": "analysis_process_access",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "admin.resources.index",
+                            "name": "cruds.resource.title",
+                            "icon": "circle",
+                            "slug": "admin.resources.index",
+                            "permission": "resource_access"
+                        },
+                        {
+                            "url": "admin.jobs.index",
+                            "name": "cruds.job.title",
+                            "icon": "circle",
+                            "slug": "admin.jobs.index",
+                            "permission": "job_access"
+                        },
+                        {
+                            "url": "admin.methods.index",
+                            "name": "cruds.method.title",
+                            "icon": "circle",
+                            "slug": "admin.methods.index",
+                            "permission": "method_access"
+                        },
+                        {
+                            "url": "admin.supporting-processes.index",
+                            "name": "cruds.supportingProcess.title",
+                            "icon": "circle",
+                            "slug": "admin.supporting-processes.index",
+                            "permission": "supporting_process_access"
+                        },
+                        {
+                            "url": "admin.analysis-processes.index",
+                            "name": "cruds.analysisProcess.title",
+                            "icon": "circle",
+                            "slug": "admin.analysis-processes.index",
+                            "permission": "analysis_process_access"
+                        }
+                    ]
+                },
+                {
+                    "url": "admin.bribery-risk-assesments.index",
+                    "name": "Bribery Risk Assessment",
+                    "icon": "circle",
+                    "slug": "admin.bribery-risk-assesments.index",
+                    "permission": "bribery_risk_assesment_access"
+                },
+                {
+                    "url": "admin.risk-mitigation-monitorings.index",
+                    "name": "cruds.riskMitigationMonitoring.title",
+                    "icon": "circle",
+                    "slug": "admin.risk-mitigation-monitorings.index",
+                    "permission": "risk_mitigation_monitoring_access"
+                },
+                {
+                    "url": "admin.systemCalendar",
+                    "name": "global.systemCalendar",
+                    "icon": "circle",
+                    "slug": "admin.systemCalendar",
+                    "permission": "risk_mitigation_monitoring_access"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,51 @@
+{
+    "menu": [
+        {
+            "navheader" : "Dashboard",
+            "permission": "dashboard_header_access"
+        },
+        {
+            "url": "admin.home",
+            "name": "global.dashboard",
+            "permission": "dashboard_access",
+            "icon": "home",
+            "slug": "admin.home"
+        },
+        {
+            "name": "cruds.userManagement.title",
+            "icon": "users",
+            "permission": "user_management_access",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "admin.permissions.index",
+                    "name": "cruds.permission.title",
+                    "icon": "circle",
+                    "slug": "admin.permissions.index",
+                    "permission": "permission_access"
+                },
+                {
+                    "url": "admin.roles.index",
+                    "name": "cruds.role.title",
+                    "icon": "circle",
+                    "slug": "admin.roles.index",
+                    "permission": "role_access"
+                },
+                {
+                    "url": "admin.users.index",
+                    "name": "cruds.user.title",
+                    "icon": "circle",
+                    "slug": "admin.users.index",
+                    "permission": "user_access"
+                },
+                {
+                    "url": "admin.departments.index",
+                    "name": "cruds.department.title",
+                    "icon": "circle",
+                    "slug": "admin.departments.index",
+                    "permission": "department_access"
+                }
+            ]
+        },
+    ]
+}

@@ -1,0 +1,838 @@
+/* @@@@@@@@@@@@@  Banner Section Start Here  @@@@@@@@@@@@@@ */
+.banner-section {
+    @extend %rel;
+    @extend %hidden;
+    padding: 100px 0;
+    @include breakpoint(lg) {
+        padding: 170px 0 90px;
+    }
+    .round-shape {
+        @include breakpoint(lg) {
+            @include breakpoint(max-xl) {
+                top: 70%;
+            }
+        }
+    }
+    .banner-area {
+        .content-part {
+            .section-header {
+                h2, p, a, span {
+                    color: $white-color;
+                }
+                h2 {
+                    @include breakpoint(lg) {
+                        font-size: $fs-h1;
+                        line-height: $lh-h1;
+                    }
+                }
+                p {
+                    @include breakpoint(xl) {
+                        max-width: 520px;
+                    }
+                }
+                .button-group {
+                    @extend %flex;
+                    align-items: center;
+                    margin-top: 40px;
+                    .lab-btn {
+                        margin-bottom: 30px;
+                        padding: 16px 35px;
+                        @include breakpoint(sm) {
+                            margin-right: 15px;
+                            margin-bottom: 0;
+                        }
+                        span {
+                            font-weight: 400;
+                        }
+                    }
+                    .banner-video {
+                        @extend %flex;
+                        align-items: center;
+                        @include breakpoint(max-sm) {
+                            width: 100%;
+                        }
+                        a {
+                            margin-right: 10px;
+                            width: 48px;
+                            height: 48px;
+                            border-radius: 100%;
+                            line-height: 48px;
+                            font-size: 46px;
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+        }
+        .section-wrapper {
+            @include breakpoint(max-lg) {}
+            .banner-thumb {
+                text-align: center;
+                img {
+                    @include breakpoint(xl) {
+                        max-width: none;
+                    }
+                }
+            }
+        }
+    }
+    &.style-2 {
+        padding: 0;
+        &::after {
+            @extend %abs;
+            background: url(../../assets/images/banner/host/01-bg.png) no-repeat;
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            @include breakpoint(lg) {
+                width: 50%;
+            }
+        }
+        .banner-area {
+            @extend %flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row-reverse;
+            position: static;
+            top: 0;
+            transform: translateY(0%);
+        }
+        .left-side {
+            width: 100%;
+            height: 400px;
+            @extend %rel;
+            @include breakpoint(lg) {
+                width: calc(100% / 2);
+                height: 800px;
+            }
+            .section-wrapper {
+                height: 100%;
+                display: block;
+                .banner-pagination {
+                    @extend %abs;
+                    bottom: 20px;
+                    left: 20px;
+                    z-index: 1;
+                    span {
+                        background: $white-color;
+                        outline: none;
+                    }
+                }
+                .banner-slider {
+                    @extend %hidden;
+                    height: 100%;
+                    .banner-thumb {
+                        img {
+                            width: 100%;
+                        }
+                    }
+                    .swiper-slide {
+                        background-size: cover !important; 
+                        background-position: center center !important;
+                    }
+                }
+            }
+        }
+        .right-side {
+            width: 100%;
+            margin: 50px 0;
+            @include breakpoint(lg) {
+                width: calc(100% / 2);
+                margin: 0;
+            }
+            .content-part {
+                max-width: 95%;
+                margin-left: auto;
+                @include breakpoint(lg) {
+                    max-width: 90%;
+                }
+                @include breakpoint(xxl) {
+                    max-width: 80%;
+                }
+                @include breakpoint(xxxl) {
+                    max-width: 62%;
+                }
+                .section-header {
+                    &::after {
+                        display: none;
+                    }
+                    .banner-price {
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 100%;
+                        text-align: center;
+                        background: linear-gradient(to right, #f9769d, #bb6df7);
+                        right: 20%;
+                        top: -100px;
+                        z-index: 1;
+                        animation: lab_sideeffect 20s linear infinite;
+                        @include breakpoint(sm) {
+                            top: -20px;
+                            right: 0;
+                        }
+                        @include breakpoint(lg) {
+                            @include breakpoint(max-xl) {
+                                right: -17%;
+                            }
+                        }
+                        @extend %abs;
+                        p {
+                            margin-bottom: 0;
+                            padding-top: 15px;
+                        }
+                        span {
+                            font-weight: 700;
+                            font-size: 30px;
+                        }
+                    }
+                    h2 {
+                        margin: 0;
+                        color: $theme-color;
+                        @include breakpoint(max-lg) {
+                            line-height: 36px;
+                            font-size: 32px;
+                        }
+                        &:last-child {
+                            margin-bottom: auto;
+                        }
+                        span {
+                            font-weight: 400;
+                            color: $title-color;
+                        }
+                    }
+                    ul {
+                        margin: 15px 0;
+                        li {
+                            display: block;
+                            i {
+                                margin-right: 5px;
+                                color: $theme-color;
+                            }
+                        }
+                    }
+                    .button-group {
+                        .lab-btn {
+                            background: linear-gradient(to right, #f9769d, #bb6df7);
+                        }
+                        .banner-video {
+                            a {
+                                font-size: $fs-h2;
+                                color: $theme-color;
+                                box-shadow: 0 10px 10px rgba(255, 124, 171, .08);
+                            }
+                            span {
+                                color: $title-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.style-3 {
+        @include breakpoint(lg) {
+            padding: 280px 0 182px;
+        }
+        .round-shape {
+            width: 800px;
+            height: 800px;
+            @include breakpoint(xl) {
+                right: 0%;
+            }
+            @include breakpoint(xxl) {
+                right: 15%;
+            }
+            @include breakpoint(xxxl) {
+                right: 8%;
+            }
+        }
+        .shape {
+            &.round-5 {
+                width: 400px;
+                height: 400px;
+                background: #b787f4;
+                animation: lab_banner_round 1s infinite;
+            }
+            &.round-4 {
+                width: 500px;
+                height: 500px;
+                background: #a169ed;
+                animation: lab_banner_round 2s infinite;
+            }
+            &.round-3 {
+                width: 600px;
+                height: 600px;
+                background: #995dec;
+                animation: lab_banner_round 3s infinite;
+            }
+            &.round-2 {
+                width: 700px;
+                height: 700px;
+                background: #8e52e7;
+                animation: lab_banner_round 4s infinite;
+            }
+            &.round-1 {
+                width: 800px;
+                height: 800px;
+                background: #864ae3;
+                animation: lab_banner_round 5s infinite;
+            }
+        }
+        .banner-area {
+            .content-part {
+                .section-header {
+                    &::after {
+                        display: none;
+                    }
+                    h2 {
+                        margin: 0;
+                        @include breakpoint(max-sm) {
+                            font-size: 30px;
+                        }
+                    }
+                    >span {
+                        font-size: 20px;
+                        font-weight: 700;
+                        margin: 5px 0 10px;
+                        display: inline-block;
+                        text-transform: capitalize;
+                        letter-spacing: 1px;
+                        @include breakpoint(sm) {
+                            font-size: $fs-h2;
+                            margin: 0;
+                        }
+                    }
+                    p {
+                        margin: 5px 0 40px;
+                        margin-top: 5px;
+                        @include breakpoint(sm) {
+                            margin: 15px 0 40px;
+                        }
+                    }
+                }
+            }
+            .section-wrapper {
+                margin-top: 40px;
+                @include breakpoint(xl) {
+                    margin-top: 0;
+                }
+                .banner-thumb {
+                    @include breakpoint(xxxl) {
+                        @include transform(translateX(80px));
+                    }
+                    &::after {
+                        display: none;
+                    }
+                    .thumb-shape {
+                        @include breakpoint(max-sm) {
+                            display: none;
+                        }
+                        .th-shape {
+                            @extend %abs;
+                            @extend %hidden;
+                            @include border-radius(3px);
+                            box-shadow: 0 0 30px rgba(50, 36, 150, .30);
+                            &.th-shape-1 {
+                                top: 50%;
+                                left: 0;
+                                animation: lab_run_top_y 5s linear infinite;
+                                @include transform(translateY(-50%));
+                            }
+                            &.th-shape-2 {
+                                top: 0px;
+                                left: 50%;
+                                animation: lab_run_x 5s linear infinite;
+                                @include transform(translateX(-50%));
+                                @include breakpoint(xl) {
+                                    top: -30px;
+                                }
+                            }
+                            &.th-shape-3 {
+                                top: 0;
+                                right: 0px;
+                                animation: lab_zoomin 8s linear infinite;
+                                @include transform(translateX(80px));
+                                @include breakpoint(xl) {
+                                    right: -100px;
+                                }
+                            }
+                            &.th-shape-4 {
+                                top: 50%;
+                                right: 0px;
+                                animation: lab_run_top_y 5s linear infinite;
+                                @include transform(translateY(-50%));
+                                @include breakpoint(xl) {
+                                    right: -100px;
+                                }
+                            }
+                            &.th-shape-5 {
+                                bottom: -30px;
+                                left: 50%;
+                                animation: lab_run_x 5s linear infinite;
+                                @include transform(translateX(-50%));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.style-4 {
+        background: url(../../assets/images/banner/vpn/bg.jpg);
+        background-position: center;
+        background-size: cover;
+        .banner-area {
+            .content-part {
+                .section-header {
+                    &::after {
+                        display: none;
+                    }
+                    h2 {
+                        margin: 0;
+                        color: $title-color;
+                        @include breakpoint(max-sm) {
+                            font-size: 30px;
+                        }
+                    }
+                    p {
+                        margin: 5px 0 30px;
+                        margin-top: 5px;
+                        color: $desc-color;
+                        @include breakpoint(sm) {
+                            margin: 15px 0 30px;
+                        }
+                    }
+                    .lab-btn {
+                        background: linear-gradient(to right, #23cc88, #8ecf35);
+                        box-shadow: 0 10px 10px rgba(38, 204, 133, .10);
+                        &:hover {
+                            box-shadow: none;
+                        }
+                    }
+                }
+            }
+            .section-wrapper {
+                .banner-thumb {
+                    img {
+                        @include breakpoint(max-xxl) {
+                            max-width: 100%;
+                        }
+                    }
+                    .thumb-shape {
+                        @include breakpoint(max-xl) {
+                            display: none;
+                        }
+                        .th-shape {
+                            @extend %abs;
+                            @extend %hidden;
+                            @include border-radius(3px);
+                            &.th-shape-1 {
+                                bottom: 50%;
+                                right: 0px;
+                                animation: lab_run_top_y 5s linear infinite;
+                                @include transform(translateY(50%));
+                                @include breakpoint(xxl) {
+                                    right: -80px;
+                                }
+                            }
+                            &.th-shape-2 {
+                                top: 35px;
+                                left: 20%;
+                                animation: lab_run_x 5s linear infinite;
+                                @include breakpoint(xxl) {
+                                    left: 35%;
+                                }
+                            }
+                            &.th-shape-3 {
+                                animation: lab_zoomin 5s linear infinite;
+                                bottom: 110px;
+                                right: 20px;
+                                @include breakpoint(xxl) {
+                                    bottom: 160px;
+                                    right: -20px;
+                                }
+                            }
+                            &.th-shape-4 {
+                                animation: lab_run_top_y 5s linear infinite;
+                                top: 40%;
+                                right: 130px;
+                            }
+                        }
+                    }
+                    &::after {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    &.style-5 {
+        @extend %rel;
+        background: #f9f2ff;
+        @include breakpoint(lg) {
+            padding: 265px 0 190px;
+        }
+        .pos-banner-shape {
+            @extend %abs;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            .pos-shape-1, .pos-shape-2 {
+                @extend %abs;
+                @include breakpoint(max-xl) {
+                    display: none;
+                }
+            }
+            .pos-shape-1 {
+                left: -22%;
+                @include breakpoint(xxl) {
+                    left: 0;
+                }
+            }
+            .pos-shape-2 {
+                right: -22%;
+                @include breakpoint(xxl) {
+                    right: 0;
+                }
+            }
+        }
+        .banner-area {
+            .content-part {
+                .section-header {
+                    &::after {
+                        display: none;
+                    }
+                    h2 {
+                        margin: 0;
+                        color: $title-color;
+                        @include breakpoint(max-sm) {
+                            font-size: 30px;
+                        }
+                    }
+                    p {
+                        margin: 5px 0 30px;
+                        margin-top: 10px;
+                        color: $desc-color;
+                        @include breakpoint(sm) {
+                            margin: 15px 0 30px;
+                        }
+                    }
+                    .lab-btn {
+                        background: linear-gradient(to right, #ff5195, #ffb84b);
+                        &:hover {
+                            box-shadow: none;
+                        }
+                    }
+                }
+            }
+            .section-wrapper {
+                .banner-thumb {
+                    @include breakpoint(max-xxl) {
+                        @include breakpoint(xl) {
+                            margin-right: -120px;
+                        }
+                    }
+                    .thumb-shape {
+                        @include breakpoint(max-xl) {
+                            display: none;
+                        }
+                    }
+                    .th-shape {
+                        @extend %abs;
+                        @extend %hidden;
+                        @include border-radius(3px);
+                        &.th-shape-1 {
+                            top: 23%;
+                            right: 35%;
+                            animation: lab_sideeffect 15s linear infinite;
+                            @include breakpoint(xl) {
+                                right: -10%;
+                            }
+                        }
+                        &.th-shape-2 {
+                            top: 0;
+                            right: -10%;
+                            animation: lab_zoomin 5s linear infinite;
+                            @include breakpoint(xl) {
+                                right: -40%;
+                            }
+                        }
+                        &.th-shape-3 {
+                            animation: lab_run_top_y 5s linear infinite;
+                            bottom: 0px;
+                            left: 25%;
+                            @include breakpoint(xl) {
+                                left: 40%
+
+                            }
+                        }
+                    }
+                    &::after {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    &.style-6 {
+        background-image: linear-gradient(to top, #fffbfa, #fffcfc, #fffdfe, #fffeff, #ffffff);
+        @include breakpoint(lg) {
+            padding: 190px 0 110px;
+        }
+        .banner-area {
+            .content-part {
+                .section-header {
+                    &::after {
+                        display: none;
+                    }
+                    h2 {
+                        margin: 0;
+                        color: $title-color;
+                        @include breakpoint(max-sm) {
+                            font-size: 30px;
+                        }
+                    }
+                    p {
+                        margin: 5px 0 30px;
+                        margin-top: 10px;
+                        color: $desc-color;
+                        @include breakpoint(sm) {
+                            margin: 15px 0 30px;
+                        }
+                    }
+                    .lab-btn {
+                        background: linear-gradient(to right, #ffab8b, #fd4372);
+                        box-shadow: 0 10px 10px rgba(248, 118, 158, .10);
+                        &:hover {
+                            box-shadow: none;
+                        }
+                    }
+                }
+            }
+            .section-wrapper {
+                .banner-thumb {
+                    @include breakpoint(max-xxl) {
+                        @include breakpoint(xl) {
+                            margin-right: -120px;
+                        }
+                    }
+                    .th-shape {
+                        @extend %abs;
+                        @extend %hidden;
+                        @include breakpoint(max-md) {
+                            display: none;
+                        }
+                        &.th-shape-1 {
+                            top: 25%;
+                            left: 20%;
+                            animation: lab_zoomin 3s linear infinite;
+                        }
+                        &.th-shape-2 {
+                            bottom: 45%;
+                            right: 0%;
+                            animation: lab_run_top_y 5s linear infinite;
+                            @include breakpoint(xl) {
+                                right: -20%;
+                            }
+                        }
+                        &.th-shape-3 {
+                            animation: lab_zoomin 5s linear infinite;
+                            bottom: 65%;
+                            left: 55%;
+                        }
+                        &.th-shape-4 {
+                            top: 65%;
+                            left: 0;
+                            animation: lab_run_top_y 5s linear infinite;
+                        }
+                    }
+                    &::after {
+                        display: none;
+                    }
+                }
+            }
+        }
+        &.shopapp {
+            background: #f4f9ff;
+            @include breakpoint(lg) {
+                padding: 170px 0 90px;
+            }
+            .banner-area .content-part .section-header .lab-btn {
+                background: linear-gradient(to right, #fd2c8b, #996bfb);
+                box-shadow: none;
+            }
+            .banner-area {
+                .section-wrapper {
+                    .banner-thumb {
+                        .th-shape {
+                            &.th-shape-1 {
+                                top: 80%;
+                                left: 20%;
+                                animation: lab_round1 15s linear infinite;
+                            }
+                            &.th-shape-2 {
+                                bottom: 65%;
+                                right: auto;
+                                left: 10%;
+                                animation: lab_zoomin 5s linear infinite;
+                                @include breakpoint(xl) {
+                                    right: auto;
+                                }
+                            }
+                            &.th-shape-3 {
+                                bottom: 10%;
+                                left: 45%;
+                                animation: lab_run_top_y 5s linear infinite;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.crypto {
+            .round-one {
+                @extend %abs;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                right: 0px;
+                img {
+                    @extend %abs;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    right: 0;
+                }
+            }
+            .banner-area .content-part .section-header h2, .banner-area .content-part .section-header p { color: $white-color; }
+            .banner-area .content-part .section-header form {
+                @extend %flex;
+                justify-content: space-between;
+            }
+            .banner-area .content-part .section-header p>a {
+                color: #f37399;
+            }
+            .banner-area .content-part .section-header form input {
+                width: calc(100% - 155px);
+                height: 56px;
+            }
+            .banner-area .content-part .section-header form button.lab-btn {
+                border: none;
+                width: 150px;
+                height: 56px;
+                outline: none;
+                cursor: pointer;
+                box-shadow:  0 10px 10px rgba(253, 119, 180, .20);
+                background: linear-gradient(to right, #fd77b4, #ffbae7);
+            }
+            .banner-area .content-part .section-header form button.lab-btn span {
+                display: inline-block;
+            }
+            .banner-area .section-wrapper .banner-thumb img {
+                animation: lab_round_glob 20s linear infinite;
+            }
+            .banner-area {
+                .bfl-content {
+                    transform: translateY(110px);
+                    @include breakpoint(max-xl) {
+                        @include breakpoint(lg) {
+                            transform: translateY(0px);
+                        }
+                    }
+                    @include breakpoint(max-lg) {
+                        transform: translateY(50px);
+                        text-align: center;
+                    }
+                    h4 {
+                        color: $white-color;
+                    }
+                }
+                .bfr-contents {
+                    transform: translateY(110px);
+                    @include breakpoint(max-xl) {
+                        @include breakpoint(lg) {
+                            transform: translateY(0px);
+                        }
+                    }
+                    @include breakpoint(max-lg) {
+                        transform: translateY(50px);
+                    }
+                    @extend %flex;
+                    justify-content: space-around;
+                    .bfr-item {
+                        &:nth-child(2) {
+                            .bfr-inner .bfr-content p.bfr-range { color: #00bf8d; }
+                        }
+                        &:nth-child(3) {
+                            .bfr-inner .bfr-content p.bfr-range { color: #ffef3b; }
+                        }
+                        &:nth-child(4) {
+                            .bfr-inner .bfr-content p.bfr-range { color: #ff8bd5; }
+                        }
+                        .bfr-inner {
+                            padding: 15px;
+                            @include breakpoint(max-xl) {
+                                @include breakpoint(lg) {
+                                    padding: 20px;
+                                }
+                            }
+                            .bfr-content {
+                                p {
+                                    color: $white-color;
+                                    margin-bottom: 0;
+                                    &.bfr-name {
+                                        margin-bottom: 10px;
+                                    }
+                                    &.bfr-rate {
+                                        font-size: 18px;
+                                    }
+                                    &.bfr-range {
+                                        color: #f37399;
+                                        font-size: 18px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.seo-banner {
+        background-image: linear-gradient(to right bottom, #1a00ff, #2010d8, #2416b2, #25188d, #231769);
+        @extend %rel;
+        .section-wrapper {
+            .banner-thumb {
+                .thumb-shape {
+                    @include breakpoint(max-md) {
+                        display: none;
+                    }
+                    .th-shape {
+                        @extend %abs;
+                        @extend %hidden;
+                        &.th-shape-1 {
+                            bottom: 0%;
+                            right: 0px;
+                            animation: lab_zoomin 3s linear infinite;
+                        }
+                        &.th-shape-2 {
+                            bottom: 150px;
+                            left: 20%;
+                            animation: lab_run_top_y 5s linear infinite;
+                        }
+                        &.th-shape-3 {
+                            animation: lab_zoomin 5s linear infinite;
+                            bottom: 75px;
+                            right: 200px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
