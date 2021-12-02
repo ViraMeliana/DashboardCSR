@@ -2,38 +2,34 @@
 
 namespace App\Http\Requests;
 
-use App\Models\HumanResource;
+use App\Models\SocialMediaSchedule;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
 
-class UpdateHumanResourceRequest extends FormRequest
+class UpdateSocialMediaScheduleRequest extends FormRequest
 {
     public function authorize()
     {
-        return Gate::allows('human_resource_edit');
+        return Gate::allows('social_media_schedule_edit');
     }
 
     public function rules()
     {
         return [
-            'position_id' => [
+            'date' => [
+                'required',
+                'date_format:' . config('panel.date_format'),
+            ],
+            'event' => [
                 'string',
                 'required',
             ],
-            'competence' => [
-                'string',
+            'type' => [
                 'required',
             ],
-            'awareness' => [
-                'string',
-                'required',
-            ],
-            'scope' => [
-                'required',
-            ],
-            'jobdesc' => [
-                'required',
+            'media' => [
+                'array',
             ],
         ];
     }

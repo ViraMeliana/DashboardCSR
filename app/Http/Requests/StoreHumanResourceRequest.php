@@ -17,7 +17,7 @@ class StoreHumanResourceRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
+            'position_id' => [
                 'string',
                 'required',
             ],

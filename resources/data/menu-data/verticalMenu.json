@@ -41,6 +41,28 @@
             ]
         },
         {
+            "name": "Social Media Scheduler",
+            "icon": "users",
+            "permission": "social_media_schedule_access",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "admin.social-media-schedules.index",
+                    "name": "cruds.socialMediaSchedule.title",
+                    "icon": "circle",
+                    "slug": "admin.social-media-schedules.index",
+                    "permission": "social_media_schedule_access"
+                },
+                {
+                    "url": "admin.socialMediaCalendar",
+                    "name": "global.systemCalendar",
+                    "icon": "circle",
+                    "slug": "admin.socialMediaCalendar",
+                    "permission": "social_media_schedule_access"
+                }
+            ]
+        },
+        {
             "name": "Position",
             "icon": "users",
             "permission": "position_access",

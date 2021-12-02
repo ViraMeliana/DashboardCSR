@@ -10,6 +10,9 @@ use App\Models\AnalysisProcess;
 use App\Models\HumanResource;
 use App\Models\Job;
 use App\Models\Method;
+use App\Models\GoalMeasurement;
+use App\Models\InputAnalysi;
+use App\Models\OutputAnalysi;
 use App\Models\Resource;
 use App\Models\SupportingProcess;
 use Gate;
@@ -114,7 +117,7 @@ class AnalysisProcessController extends Controller
         return view('admin.analysisProcesses.create', compact('resources', 'main_jobs', 'human_resources', 'methods', 'supporting_processes'));
     }
 
-    public function store(StoreAnalysisProcessRequest $request)
+    public function store(Request $request)
     {
         $analysisProcess = AnalysisProcess::create($request->all());
         $analysisProcess->resources()->sync($request->input('resources', []));
@@ -122,6 +125,15 @@ class AnalysisProcessController extends Controller
         $analysisProcess->human_resources()->sync($request->input('human_resources', []));
         $analysisProcess->methods()->sync($request->input('methods', []));
         $analysisProcess->supporting_processes()->sync($request->input('supporting_processes', []));
+
+        $analysisProcessId = AnalysisProcess::latest()->first()->id;
+
+        $kpi = $request->input('kpi');
+        $goalMeasurement = GoalMeasurement::create(['kpi'=>$kpi,'analysi_process_id'=>$analysisProcessId]);
+        $input = $request->input('input');
+        $inputAnalysi = InputAnalysi::create(['input'=>$input,'analysis_process_id'=>$analysisProcessId]);
+        $output = $request->input('output');
+        $outputAnalysi = OutputAnalysi::create(['output'=>$output,'analysis_process_id'=>$analysisProcessId]);
 
         return redirect()->route('admin.analysis-processes.index');
     }
@@ -134,18 +146,22 @@ class AnalysisProcessController extends Controller
 
         $main_jobs = Job::pluck('name', 'id');
 
-        $human_resources = HumanResource::pluck('name', 'id');
+        $human_resources = HumanResource::pluck('position_id', 'id');
 
         $methods = Method::pluck('name', 'id');
 
         $supporting_processes = SupportingProcess::pluck('name', 'id');
+        $id = $analysisProcess->id;
+        $goal = GoalMeasurement::where('analysi_process_id',$id)->first();
+        $input = InputAnalysi::where('analysis_process_id',$id)->first();
+        $output = OutputAnalysi::where('analysis_process_id',$id)->first();
 
         $analysisProcess->load('resources', 'main_jobs', 'human_resources', 'methods', 'supporting_processes');
 
-        return view('admin.analysisProcesses.edit', compact('resources', 'main_jobs', 'human_resources', 'methods', 'supporting_processes', 'analysisProcess'));
+        return view('admin.analysisProcesses.edit', compact('resources', 'main_jobs', 'human_resources', 'methods', 'supporting_processes', 'analysisProcess','goal','input','output'));
     }
 
-    public function update(UpdateAnalysisProcessRequest $request, AnalysisProcess $analysisProcess)
+    public function update(Request $request, AnalysisProcess $analysisProcess)
     {
         $analysisProcess->update($request->all());
         $analysisProcess->resources()->sync($request->input('resources', []));
@@ -153,6 +169,14 @@ class AnalysisProcessController extends Controller
         $analysisProcess->human_resources()->sync($request->input('human_resources', []));
         $analysisProcess->methods()->sync($request->input('methods', []));
         $analysisProcess->supporting_processes()->sync($request->input('supporting_processes', []));
+
+        $analysisProcessId = $request->input('id');
+        $kpi = $request->input('kpi');
+        $goalMeasurement = GoalMeasurement::where('analysi_process_id',$analysisProcessId)->update(['kpi'=>$kpi]);
+        $input = $request->input('input');
+        $inputAnalysi = InputAnalysi::where('analysis_process_id',$analysisProcessId)->update(['input'=>$input]);
+        $output = $request->input('output');
+        $outputAnalysi = OutputAnalysi::where('analysis_process_id',$analysisProcessId)->update(['output'=>$output]);
 
         return redirect()->route('admin.analysis-processes.index');
     }

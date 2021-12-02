@@ -45,7 +45,7 @@
                         </th>
                         <td>
                             @foreach($analysisProcess->human_resources as $key => $human_resource)
-                                <span class="label label-info">{{ $human_resource->name }}</span>
+                                <span class="label label-info">{{ $human_resource->position_id }}</span>
                             @endforeach
                         </td>
                     </tr>

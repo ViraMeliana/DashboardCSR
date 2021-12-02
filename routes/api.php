@@ -59,4 +59,8 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Goal Measurement
     Route::apiResource('goal-measurements', 'GoalMeasurementApiController', ['except' => ['show']]);
+
+    // Social Media Schedule
+    Route::post('social-media-schedules/media', 'SocialMediaScheduleApiController@storeMedia')->name('social-media-schedules.storeMedia');
+    Route::apiResource('social-media-schedules', 'SocialMediaScheduleApiController');
 });

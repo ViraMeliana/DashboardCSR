@@ -31,13 +31,12 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-12">
                                 <div class="mb-1">
-                                    <label class="required" for="name">{{ trans('cruds.humanResource.fields.name') }}</label>
-                                    <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $humanResource->name) }}" required>
-                                    @if($errors->has('name'))
-                                        <div class="invalid-feedback">
-                                            {{ $errors->first('name') }}
-                                        </div>
-                                    @endif
+                                <label class="required" for="position_id">{{ trans('cruds.humanResource.fields.name') }}</label>
+                                    <select class="form-control select2 {{ $errors->has('position_id') ? 'is-invalid' : '' }}" name="position_id" id="position_id">
+                                        @foreach($position as $id => $entry)
+                                            <option value="{{ $id }}" {{ (old('position_id') ? old('position_id') : $humanResource->position_id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                        @endforeach
+                                    </select>
                                     <p><small
                                             class="text-muted">{{ trans('cruds.humanResource.fields.name_helper') }}</small>
                                     </p>

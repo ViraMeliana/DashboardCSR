@@ -27,6 +27,7 @@
                     <form method="POST" action="{{ route("admin.analysis-processes.update", [$analysisProcess->id]) }}" enctype="multipart/form-data">
                     @method('PUT')
                         @csrf
+                        <input type="hidden" value="{{$analysisProcess->id}}" name="id">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-12">
                                 <div class="mb-1">
@@ -163,6 +164,54 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                             <div class="col-xl-12 col-md-12 col-12">
+                                <div class="mb-1">
+                                    <label class="required" for="kpi">{{ trans('cruds.goalMeasurement.fields.kpi') }}</label>
+                                    <textarea class="form-control {{ $errors->has('kpi') ? 'is-invalid' : '' }}" type="text" name="kpi" id="kpi" required> {{ old('kpi', $goal->kpi) }} </textarea>
+                                    @if($errors->has('kpi'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('kpi') }}
+                                        </div>
+                                    @endif
+                                    <p><small
+                                            class="text-muted">{{ trans('cruds.goalMeasurement.fields.kpi_helper') }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-12">
+                                <div class="mb-1">
+                                <label class="required" for="input">{{ trans('cruds.inputAnalysi.fields.input') }}</label>
+                                <textarea class="form-control {{ $errors->has('input') ? 'is-invalid' : '' }}" type="text" name="input" id="input" required>{{ old('input', $input->input) }}</textarea>
+                                    @if($errors->has('input'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('input') }}
+                                        </div>
+                                    @endif
+                                    <p><small
+                                            class="text-muted">{{ trans('cruds.inputAnalysi.fields.input_helper') }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-12">
+                                <div class="mb-1">
+                                <label class="required" for="output">{{ trans('cruds.outputAnalysi.fields.output') }}</label>
+                                    <textarea class="form-control {{ $errors->has('output') ? 'is-invalid' : '' }}" type="text" name="output" id="output"  required>{{ old('output', $output->output) }}</textarea>
+                                    @if($errors->has('output'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('output') }}
+                                        </div>
+                                    @endif
+                                    <p><small
+                                            class="text-muted">{{ trans('cruds.outputAnalysi.fields.output_helper') }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                         <button class="btn btn-primary waves-effect waves-float waves-light" type="submit">Submit
                         </button>
                     </form>
@@ -183,4 +232,7 @@
 
 @section('page-script')
     {{-- Page js files --}}
+    <script>
+        $('.select2').select2();
+    </script>
 @endsection

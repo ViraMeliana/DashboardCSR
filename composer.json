@@ -24,7 +24,7 @@
         "laraveldaily/laravel-charts": "^0.1.24",
         "maatwebsite/excel": "^3.1",
         "nuovo/spreadsheet-reader": "^0.5.11",
-        "spatie/laravel-medialibrary": "^8.7",
+        "spatie/laravel-medialibrary": "9.0.0",
         "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {

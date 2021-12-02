@@ -8,6 +8,7 @@ use App\Http\Requests\StoreHumanResourceRequest;
 use App\Http\Requests\UpdateHumanResourceRequest;
 use App\Models\HumanResource;
 use App\Models\User;
+use App\Models\Position;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +46,7 @@ class HumanResourcesController extends Controller
                 return $row->id ? $row->id : '';
             });
             $table->editColumn('name', function ($row) {
-                return $row->name ? $row->name : '';
+                return $row->position_id ? $row->position_id : '';
             });
             $table->editColumn('competence', function ($row) {
                 return $row->competence ? $row->competence : '';
@@ -76,8 +77,8 @@ class HumanResourcesController extends Controller
         abort_if(Gate::denies('human_resource_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('admin.humanResources.create', compact('users'));
+        $position = Position::pluck('name', 'id');
+        return view('admin.humanResources.create', compact('users','position'));
     }
 
     public function store(StoreHumanResourceRequest $request)
@@ -92,10 +93,10 @@ class HumanResourcesController extends Controller
         abort_if(Gate::denies('human_resource_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
+        $position = Position::pluck('name', 'id');
         $humanResource->load('user');
 
-        return view('admin.humanResources.edit', compact('users', 'humanResource'));
+        return view('admin.humanResources.edit', compact('users', 'humanResource','position'));
     }
 
     public function update(UpdateHumanResourceRequest $request, HumanResource $humanResource)

@@ -128,6 +128,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('goal-measurements/destroy', 'GoalMeasurementController@massDestroy')->name('goal-measurements.massDestroy');
     Route::resource('goal-measurements', 'GoalMeasurementController', ['except' => ['show']]);
 
+    // Social Media Schedule
+    Route::delete('social-media-schedules/destroy', 'SocialMediaScheduleController@massDestroy')->name('social-media-schedules.massDestroy');
+    Route::post('social-media-schedules/media', 'SocialMediaScheduleController@storeMedia')->name('social-media-schedules.storeMedia');
+    Route::post('social-media-schedules/ckmedia', 'SocialMediaScheduleController@storeCKEditorImages')->name('social-media-schedules.storeCKEditorImages');
+    Route::resource('social-media-schedules', 'SocialMediaScheduleController');
+    Route::get('system-social-media-calendar', 'SocialMediaCalendarController@index')->name('socialMediaCalendar');
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

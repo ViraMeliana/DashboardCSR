@@ -23,8 +23,7 @@
                     </h4>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route("admin.analysis-processes.store") }}" enctype="multipart/form-data">
-
+                    <form method="POST" action="{{ route("admin.analysis-processes.store") }}" enctype="multipart/form-data" class="invoice-repeater">
                         @csrf
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-12">
@@ -150,7 +149,7 @@
                             <div class="col-xl-12 col-md-12 col-12">
                                 <div class="mb-1">
                                     <label for="date">{{ trans('cruds.analysisProcess.fields.date') }}</label>
-                                    <input class="form-control date {{ $errors->has('date') ? 'is-invalid' : '' }}" type="text" name="date" id="date" value="{{ old('date') }}">
+                                    <input class="form-control {{ $errors->has('date') ? 'is-invalid' : '' }}" type="date" name="date" id="date" value="{{ old('date') }}">
                                     @if($errors->has('date'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('date') }}
@@ -162,6 +161,56 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                             <div class="col-xl-12 col-md-12 col-12">
+                                <div class="mb-1">
+                                    <label class="required" for="kpi">{{ trans('cruds.goalMeasurement.fields.kpi') }}</label>
+                                    <textarea class="form-control {{ $errors->has('kpi') ? 'is-invalid' : '' }}" type="text" name="kpi" id="kpi" value="{{ old('kpi', '') }}" required></textarea>
+                                    @if($errors->has('kpi'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('kpi') }}
+                                        </div>
+                                    @endif
+                                    <p><small
+                                            class="text-muted">{{ trans('cruds.goalMeasurement.fields.kpi_helper') }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-12">
+                                <div class="mb-1">
+                                <label class="required" for="input">{{ trans('cruds.inputAnalysi.fields.input') }}</label>
+                                <textarea class="form-control {{ $errors->has('input') ? 'is-invalid' : '' }}" type="text" name="input" id="input" value="{{ old('input', '') }}" required></textarea>
+                                    @if($errors->has('input'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('input') }}
+                                        </div>
+                                    @endif
+                                    <p><small
+                                            class="text-muted">{{ trans('cruds.inputAnalysi.fields.input_helper') }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-12">
+                                <div class="mb-1">
+                                <label class="required" for="output">{{ trans('cruds.outputAnalysi.fields.output') }}</label>
+                                    <textarea class="form-control {{ $errors->has('output') ? 'is-invalid' : '' }}" type="text" name="output" id="output" value="{{ old('output', '') }}" required>
+                                    </textarea>
+                                    @if($errors->has('output'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('output') }}
+                                        </div>
+                                    @endif
+                                    <p><small
+                                            class="text-muted">{{ trans('cruds.outputAnalysi.fields.output_helper') }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                         <button class="btn btn-primary waves-effect waves-float waves-light" type="submit">Submit
                         </button>
                     </form>
@@ -177,7 +226,6 @@
 @section('vendor-script')
     {{-- vendor files --}}
     <script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
-
 @endsection
 
 @section('page-script')
