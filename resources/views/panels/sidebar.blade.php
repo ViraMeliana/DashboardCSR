@@ -9,7 +9,7 @@
             <li class="nav-item me-auto">
                 <a class="navbar-brand" href="{{ url('/') }}">
             <span class="brand-logo">
-              <img src="{{ asset('images/logo/logo.svg') }}" style="width: 32px; height: 32px" alt=""/>
+{{--              <img src="{{ asset('images/logo/logo.svg') }}" style="width: 32px; height: 32px" alt=""/>--}}
 
             </span>
                     <h2 class="brand-text text-primary ms-1"> CSR </h2>

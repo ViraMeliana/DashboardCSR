@@ -362,6 +362,107 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 88,
                 'title' => 'profile_password_edit',
             ],
+            [
+                'id'    => 89,
+                'title' => 'dashboard_header_access',
+            ],
+            [
+                'id'    => 90,
+                'title' => 'social_media_schedule_access',
+            ],
+            [
+                'id'    => 91,
+                'title' => 'operations_header_access',
+            ],
+            [
+                'id'    => 92,
+                'title' => 'dashboard_access',
+            ],
+            [
+                'id'    => 93,
+                'title' => 'users_header_access',
+            ],
+
+            [
+                'id'    => 94,
+                'title' => 'pilar_create',
+            ],
+            [
+                'id'    => 95,
+                'title' => 'pilar_edit',
+            ],
+            [
+                'id'    => 96,
+                'title' => 'pilar_show',
+            ],
+            [
+                'id'    => 97,
+                'title' => 'pilar_delete',
+            ],
+            [
+                'id'    => 98,
+                'title' => 'pilar_access',
+            ],
+            [
+                'id'    => 99,
+                'title' => 'tpb_create',
+            ],
+            [
+                'id'    => 100,
+                'title' => 'tpb_edit',
+            ],
+            [
+                'id'    => 101,
+                'title' => 'tpb_show',
+            ],
+            [
+                'id'    => 102,
+                'title' => 'tpb_delete',
+            ],
+            [
+                'id'    => 103,
+                'title' => 'tpb_access',
+            ],
+            [
+                'id'    => 104,
+                'title' => 'tjsl_create',
+            ],
+            [
+                'id'    => 105,
+                'title' => 'tjsl_edit',
+            ],
+            [
+                'id'    => 106,
+                'title' => 'tjsl_show',
+            ],
+            [
+                'id'    => 107,
+                'title' => 'tjsl_delete',
+            ],
+            [
+                'id'    => 108,
+                'title' => 'tjsl_access',
+            ],
+            [
+                'id'    => 109,
+                'title' => 'realtime_activity_create',
+            ],
+            [
+                'id'    => 110,
+                'title' => 'realtime_activity_edit',
+            ],
+            [
+                'id'    => 111,
+                'title' => 'realtime_activity_show',
+            ],
+            [
+                'id'    => 112,
+                'title' => 'realtime_activity_delete',
+            ],
+            [
+                'id'    => 113,
+                'title' => 'realtime_activity_access',
+            ],
         ];
 
         Permission::insert($permissions);

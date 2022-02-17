@@ -63,4 +63,17 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Social Media Schedule
     Route::post('social-media-schedules/media', 'SocialMediaScheduleApiController@storeMedia')->name('social-media-schedules.storeMedia');
     Route::apiResource('social-media-schedules', 'SocialMediaScheduleApiController');
+
+    // Pilar
+    Route::apiResource('pilars', 'PilarApiController');
+
+    // Tpb
+    Route::apiResource('tpbs', 'TpbApiController');
+
+    // Tjsl
+    Route::apiResource('tjsls', 'TjslApiController');
+
+    // Realtime Activity
+    Route::post('realtime-activities/media', 'RealtimeActivityApiController@storeMedia')->name('realtime-activities.storeMedia');
+    Route::apiResource('realtime-activities', 'RealtimeActivityApiController');
 });

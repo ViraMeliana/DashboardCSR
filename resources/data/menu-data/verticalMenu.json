@@ -12,6 +12,10 @@
             "slug": "admin.home"
         },
         {
+            "navheader" : "Users",
+            "permission": "users_header_access"
+        },
+        {
             "name": "cruds.userManagement.title",
             "icon": "users",
             "permission": "user_management_access",
@@ -41,28 +45,6 @@
             ]
         },
         {
-            "name": "Social Media Scheduler",
-            "icon": "users",
-            "permission": "social_media_schedule_access",
-            "slug": "",
-            "submenu": [
-                {
-                    "url": "admin.social-media-schedules.index",
-                    "name": "cruds.socialMediaSchedule.title",
-                    "icon": "circle",
-                    "slug": "admin.social-media-schedules.index",
-                    "permission": "social_media_schedule_access"
-                },
-                {
-                    "url": "admin.socialMediaCalendar",
-                    "name": "global.systemCalendar",
-                    "icon": "circle",
-                    "slug": "admin.socialMediaCalendar",
-                    "permission": "social_media_schedule_access"
-                }
-            ]
-        },
-        {
             "name": "Position",
             "icon": "users",
             "permission": "position_access",
@@ -81,6 +63,33 @@
                     "icon": "circle",
                     "slug": "admin.human-resources.index",
                     "permission": "human_resource_access"
+                }
+            ]
+        },
+
+        {
+            "navheader" : "Operations",
+            "permission": "operations_header_access"
+        },
+        {
+            "name": "Social Media Scheduler",
+            "icon": "users",
+            "permission": "social_media_schedule_access",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "admin.social-media-schedules.index",
+                    "name": "cruds.socialMediaSchedule.title",
+                    "icon": "circle",
+                    "slug": "admin.social-media-schedules.index",
+                    "permission": "social_media_schedule_access"
+                },
+                {
+                    "url": "admin.socialMediaCalendar",
+                    "name": "global.systemCalendar",
+                    "icon": "circle",
+                    "slug": "admin.socialMediaCalendar",
+                    "permission": "social_media_schedule_access"
                 }
             ]
         },
@@ -206,6 +215,13 @@
                     "permission": "risk_mitigation_monitoring_access"
                 }
             ]
+        },
+        {
+            "url": "admin.tjsls.index",
+            "name": "cruds.tjsl.title",
+            "icon": "archive",
+            "slug": "admin.tjsls.index",
+            "permission": "tjsl_access"
         }
     ]
 }

@@ -136,6 +136,25 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('system-social-media-calendar', 'SocialMediaCalendarController@index')->name('socialMediaCalendar');
 
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
+
+    // Pilar
+    Route::delete('pilars/destroy', 'PilarController@massDestroy')->name('pilars.massDestroy');
+    Route::resource('pilars', 'PilarController');
+
+    // Tpb
+    Route::delete('tpbs/destroy', 'TpbController@massDestroy')->name('tpbs.massDestroy');
+    Route::resource('tpbs', 'TpbController');
+
+    // Tjsl
+    Route::delete('tjsls/destroy', 'TjslController@massDestroy')->name('tjsls.massDestroy');
+    Route::post('tjsls/process-csv-import', 'TjslController@processCsvImport')->name('tjsls.processCsvImport');
+    Route::resource('tjsls', 'TjslController');
+
+    // Realtime Activity
+    Route::delete('realtime-activities/destroy', 'RealtimeActivityController@massDestroy')->name('realtime-activities.massDestroy');
+    Route::post('realtime-activities/media', 'RealtimeActivityController@storeMedia')->name('realtime-activities.storeMedia');
+    Route::post('realtime-activities/ckmedia', 'RealtimeActivityController@storeCKEditorImages')->name('realtime-activities.storeCKEditorImages');
+    Route::resource('realtime-activities', 'RealtimeActivityController');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
