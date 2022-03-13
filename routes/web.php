@@ -36,6 +36,10 @@ Route::get('/home', function () {
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('landing.index');
+Route::get('/about', [HomeController::class, 'about'])->name('landing.about');
+Route::get('/activity', [HomeController::class, 'activity'])->name('landing.activity');
+Route::post('/store', [HomeController::class, 'store'])->name('landing.activity.store');
+Route::get('/add-activity', [HomeController::class, 'createActivity'])->name('landing.createActivity');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');

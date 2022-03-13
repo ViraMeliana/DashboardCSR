@@ -15,8 +15,10 @@
     <link rel="stylesheet" href="{{asset('landing-assets/css/lightcase.css')}}">
     <link rel="stylesheet" href="{{asset('landing-assets/css/swiper.min.css')}}">
     <link rel="stylesheet" href="{{asset('landing-assets/css/style.css')}}">
+    <script src="{{ asset(mix('vendors/css/file-uploaders/dropzone.min.css')) }}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
 
-    <title>Smart-ShopApp</title>
+    <title>Dashboard CSR</title>
 </head>
 
 <body>
@@ -25,7 +27,7 @@
 <div class="mobile-menu shopapp-bg">
     <nav class="mobile-header">
         <div class="header-logo">
-            <a href="index-vpn.html"><img src="{{asset('landing-assets/images/logo/shopapp.png')}}" alt="logo"></a>
+            <a href="/"><img src="{{asset('images/sig/s.png')}}" alt="logo"></a>
         </div>
         <div class="header-bar">
             <span></span>
@@ -102,23 +104,21 @@
 
 
 <!-- desktop menu start here -->
-<header class="header-section transparent-header shopapp-bg">
+<header class="header-section host-bg">
     <div class="header-area">
         <div class="container">
             <div class="primary-menu">
                 <div class="logo">
-                    <a href="index-vpn.html"><img src="{{asset('landing-assets/images/logo/shopapp.png')}}" alt="logo"></a>
+                    <a href="/"><img src="{{asset('landing-assets/images/logo/logo.png')}}" alt="logo"></a>
                 </div>
                 <div class="main-area">
                     <div class="main-menu">
                         <ul>
-                            <li><a href="#">Home</a>
+                            <li><a href="{{route('landing.index')}}">Home</a>
                             </li>
-                            <li><a href="#">About</a>
+                            <li><a href="{{route('landing.about')}}">About</a>
                             </li>
-                            <li><a href="#">Gallery</a>
-                            </li>
-                            <li><a href="#">Contact</a>
+                            <li><a href="{{route('landing.activity')}}">Activity</a>
                             </li>
                         </ul>
                     </div>
@@ -140,7 +140,7 @@
                         <div class="footer-inner">
                             <div class="footer-content">
                                 <div class="title">
-                                    <h6>CSR - Semen Gresik</h6>
+                                    <h6>CSR - Semen Indonesia Tbk</h6>
                                 </div>
                                 <div class="content">
                                     <p>We believe in Simple Creative & Flexible Design Standards.</p>
@@ -247,5 +247,8 @@
 <script src="{{asset('landing-assets/js/progress.js')}}"></script>
 <script src="{{asset('landing-assets/js/wow.min.js')}}"></script>
 <script src="{{asset('landing-assets/js/functions.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+
+@yield('scripts')
 </body>
 </html>

@@ -2639,7 +2639,7 @@ ul.icon-style-list {
   .banner-section.style-2 {
     padding: 0; }
     .banner-section.style-2::after {
-      background: url(../../assets/images/banner/host/01-bg.png) no-repeat;
+      background: url(landing-assets/images/banner/host/01-bg.png) no-repeat;
       background-size: cover;
       background-position: center;
       width: 100%;

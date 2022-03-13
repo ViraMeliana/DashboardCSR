@@ -19,18 +19,14 @@ class RealtimeActivityController extends Controller
 
     public function index()
     {
-        abort_if(Gate::denies('realtime_activity_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         $realtimeActivities = RealtimeActivity::with(['media'])->get();
 
-        return view('admin.realtimeActivities.index', compact('realtimeActivities'));
+        return view('landing.activity', compact('realtimeActivities'));
     }
 
     public function create()
     {
-        abort_if(Gate::denies('realtime_activity_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin.realtimeActivities.create');
+        return view('landing.createActivity');
     }
 
     public function store(StoreRealtimeActivityRequest $request)
@@ -45,14 +41,12 @@ class RealtimeActivityController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $realtimeActivity->id]);
         }
 
-        return redirect()->route('admin.realtime-activities.index');
+        return redirect()->route('landing.activity');
     }
 
     public function edit(RealtimeActivity $realtimeActivity)
     {
-        abort_if(Gate::denies('realtime_activity_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin.realtimeActivities.edit', compact('realtimeActivity'));
+        return view('landing.createActivity', compact('realtimeActivity'));
     }
 
     public function update(UpdateRealtimeActivityRequest $request, RealtimeActivity $realtimeActivity)
@@ -73,20 +67,16 @@ class RealtimeActivityController extends Controller
             }
         }
 
-        return redirect()->route('admin.realtime-activities.index');
+        return redirect()->route('landing.activity');
     }
 
     public function show(RealtimeActivity $realtimeActivity)
     {
-        abort_if(Gate::denies('realtime_activity_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         return view('admin.realtimeActivities.show', compact('realtimeActivity'));
     }
 
     public function destroy(RealtimeActivity $realtimeActivity)
     {
-        abort_if(Gate::denies('realtime_activity_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         $realtimeActivity->delete();
 
         return back();
@@ -101,8 +91,6 @@ class RealtimeActivityController extends Controller
 
     public function storeCKEditorImages(Request $request)
     {
-        abort_if(Gate::denies('realtime_activity_create') && Gate::denies('realtime_activity_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         $model         = new RealtimeActivity();
         $model->id     = $request->input('crud_id', 0);
         $model->exists = true;

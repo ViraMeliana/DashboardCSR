@@ -62,6 +62,7 @@ class RealtimeActivity extends Model implements HasMedia
         'province',
         'receiver',
         'number_of_beneficiaries',
+        'description',
         'created_at',
         'updated_at',
         'deleted_at',

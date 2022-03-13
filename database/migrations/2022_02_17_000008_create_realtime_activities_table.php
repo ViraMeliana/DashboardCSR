@@ -21,6 +21,7 @@ class CreateRealtimeActivitiesTable extends Migration
             $table->string('province')->nullable();
             $table->string('receiver');
             $table->integer('number_of_beneficiaries')->nullable();
+            $table->longText('description');
             $table->timestamps();
             $table->softDeletes();
         });
