@@ -463,6 +463,86 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 113,
                 'title' => 'realtime_activity_access',
             ],
+            [
+                'id'    => 114,
+                'title' => 'risiko_create',
+            ],
+            [
+                'id'    => 115,
+                'title' => 'risiko_edit',
+            ],
+            [
+                'id'    => 116,
+                'title' => 'risiko_show',
+            ],
+            [
+                'id'    => 117,
+                'title' => 'risiko_delete',
+            ],
+            [
+                'id'    => 118,
+                'title' => 'risiko_access',
+            ],
+            [
+                'id'    => 119,
+                'title' => 'mitigation_create',
+            ],
+            [
+                'id'    => 120,
+                'title' => 'mitigation_edit',
+            ],
+            [
+                'id'    => 121,
+                'title' => 'mitigation_show',
+            ],
+            [
+                'id'    => 122,
+                'title' => 'mitigation_delete',
+            ],
+            [
+                'id'    => 123,
+                'title' => 'mitigation_access',
+            ],
+            [
+                'id'    => 124,
+                'title' => 'evidance_create',
+            ],
+            [
+                'id'    => 125,
+                'title' => 'evidance_edit',
+            ],
+            [
+                'id'    => 126,
+                'title' => 'evidance_show',
+            ],
+            [
+                'id'    => 127,
+                'title' => 'evidance_delete',
+            ],
+            [
+                'id'    => 128,
+                'title' => 'evidance_access',
+            ],
+            [
+                'id'    => 129,
+                'title' => 'core_risk_create',
+            ],
+            [
+                'id'    => 130,
+                'title' => 'core_risk_edit',
+            ],
+            [
+                'id'    => 131,
+                'title' => 'core_risk_show',
+            ],
+            [
+                'id'    => 132,
+                'title' => 'core_risk_delete',
+            ],
+            [
+                'id'    => 133,
+                'title' => 'core_risk_access',
+            ],
         ];
 
         Permission::insert($permissions);

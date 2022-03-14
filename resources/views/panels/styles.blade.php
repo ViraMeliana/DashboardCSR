@@ -9,8 +9,8 @@
 <!-- END: Vendor CSS-->
 
 <!-- BEGIN: Theme CSS-->
-<script src="{{ asset(mix('vendors/css/file-uploaders/dropzone.min.css')) }}"></script>
-<script src="{{ asset(mix('vendors/css/pickers/pickadate/pickadate.css')) }}"></script>
+{{--<script src="{{ asset(mix('vendors/css/file-uploaders/dropzone.min.css')) }}"></script>--}}
+{{--<script src="{{ asset(mix('vendors/css/pickers/pickadate/pickadate.css')) }}"></script>--}}
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/ui/prism.min.css')) }}" />
 <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/pickers/form-flat-pickr.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">

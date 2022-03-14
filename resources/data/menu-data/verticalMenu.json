@@ -222,6 +222,21 @@
             "icon": "archive",
             "slug": "admin.tjsls.index",
             "permission": "tjsl_access"
+        },
+        {
+            "name": "cruds.coreRisk.title",
+            "icon": "alert-circle",
+            "permission": "core_risk_access",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "admin.core-risks.index",
+                    "name": "cruds.coreRisk.title",
+                    "icon": "circle",
+                    "slug": "admin.core-risks.index",
+                    "permission": "core_risk_access"
+                }
+            ]
         }
     ]
 }

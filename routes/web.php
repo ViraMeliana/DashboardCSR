@@ -14,16 +14,6 @@ use App\Http\Controllers\LanguageController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-//Route::get('/', [StaterkitController::class, 'home'])->name('home');
-//Route::get('home', [StaterkitController::class, 'home'])->name('home');
-//// Route Components
-//Route::get('layouts/collapsed-menu', [StaterkitController::class, 'collapsed_menu'])->name('collapsed-menu');
-//Route::get('layouts/full', [StaterkitController::class, 'layout_full'])->name('layout-full');
-//Route::get('layouts/without-menu', [StaterkitController::class, 'without_menu'])->name('without-menu');
-//Route::get('layouts/empty', [StaterkitController::class, 'layout_empty'])->name('layout-empty');
-//Route::get('layouts/blank', [StaterkitController::class, 'layout_blank'])->name('layout-blank');
-
 Route::redirect('/login', '/login');
 Route::get('/home', function () {
     if (session('status')) {
@@ -159,6 +149,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('realtime-activities/media', 'RealtimeActivityController@storeMedia')->name('realtime-activities.storeMedia');
     Route::post('realtime-activities/ckmedia', 'RealtimeActivityController@storeCKEditorImages')->name('realtime-activities.storeCKEditorImages');
     Route::resource('realtime-activities', 'RealtimeActivityController');
+
+    // Core Risk
+    Route::delete('core-risks/destroy', 'CoreRiskController@massDestroy')->name('core-risks.massDestroy');
+    Route::resource('core-risks', 'CoreRiskController');
+    Route::post('core-risks/parse-csv-import', 'CoreRiskController@parseCsvImport')->name('core-risks.parseCsvImport');
+    Route::post('core-risks/process-csv-import', 'CoreRiskController@processCsvImport')->name('core-risks.processCsvImport');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
