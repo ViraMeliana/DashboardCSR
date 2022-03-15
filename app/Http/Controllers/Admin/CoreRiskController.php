@@ -140,7 +140,7 @@ class CoreRiskController extends Controller
 
                         if ($row[$evidenceIndex] != null) {
                             $currentEvidence = $row[$evidenceIndex];
-                            $insert[$currentSubject]['mitigation'][$currentMitigation]['evidence'][Str::slug($row[$mitigationIndex+1])] = $currentEvidence;
+                            $insert[$currentSubject]['mitigation'][$currentMitigation]['evidence'][Str::slug($row[$mitigationIndex + 1])] = $currentEvidence;
                         }
                     }
                 }
@@ -177,8 +177,8 @@ class CoreRiskController extends Controller
                                 if ($mitigation) {
                                     $mitigationId[] = $mitigation->id;
 
-                                    if(isset($itm['users'])) {
-                                        $parseUser = explode('-',Str::slug($itm['users']));
+                                    if (isset($itm['users'])) {
+                                        $parseUser = explode('-', Str::slug($itm['users']));
                                         $userId = [];
 
                                         foreach ($parseUser as $item) {
@@ -188,7 +188,7 @@ class CoreRiskController extends Controller
                                             } else {
                                                 $createUser = User::create([
                                                     'name' => $item,
-                                                    'email' => $item.'@'.$item.'.com',
+                                                    'email' => $item . '@' . $item . '.com',
                                                     'password' => 'password',
                                                 ]);
 
@@ -271,26 +271,33 @@ class CoreRiskController extends Controller
         $coreRisk->load('risikos', 'risikos.mitigations', 'risikos.mitigations.evidances', 'risikos.mitigations.users', 'risikos.mitigations.evidances.quartals');
 
         $toShow = [];
+        $no = 1;
 
         foreach ($coreRisk->risikos as $item) {
+            $sameRisikos = false;
+
             foreach ($item->mitigations as $mitigation) {
-                $lastMitigation = 0;
+                $sameMitigation = false;
 
                 foreach ($mitigation->evidances as $evidance) {
 
                     $toShow[$item->subject][] = [
-                        'risiko' => $item->subject,
-                        'risiko_cause' => $item->cause,
-                        'risiko_impact' => $item->impact,
-                        'mitigation' => $mitigation->subject,
-                        'mitigation_category' => $mitigation->category,
+                        'no' => $sameRisikos ? '' : $no,
+                        'risiko' => $sameRisikos ? '' : $item->subject,
+                        'risiko_cause' => $sameRisikos ? '' : $item->cause,
+                        'risiko_impact' => $sameRisikos ? '' : $item->impact,
+                        'mitigation_category' => $sameMitigation ? '' :$mitigation->category,
+                        'mitigation' => $sameMitigation ? '' :$mitigation->subject,
                         'evidance' => $evidance->subject,
                         'evidance_code' => $evidance->code
                     ];
 
-                    $lastMitigation++;
+                    $sameMitigation = true;
+                    $sameRisikos = true;
                 }
             }
+
+            $no++;
         }
 
 

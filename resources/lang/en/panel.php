@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'csr',
+    'site_title' => 'CSR',
 ];

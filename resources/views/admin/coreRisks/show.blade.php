@@ -24,12 +24,28 @@
                         {{ trans('global.back_to_list') }}
                     </a>
                 </div>
-                <table class="table table-bordered table-striped">
-                    <tbody>
-{{--                    @dd($toShow)--}}
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Subject</th>
+                                <th>Sebab</th>
+                                <th>Dampak</th>
+                                <th>Pro/Re</th>
+                                <th>Mitigation</th>
+                                <th>Code</th>
+                                <th>Evidance</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         @foreach($toShow as $index => $item)
                             @foreach($item as $in => $it)
                                 <tr>
+                                    <td>
+                                        {{ $it['no'] }}
+                                    </td>
                                     <td>
                                         {{ $it['risiko'] }}
                                     </td>
@@ -45,12 +61,23 @@
                                     <td>
                                         {{ $it['mitigation'] }}
                                     </td>
+                                    <td>
+                                        {{ $it['evidance_code'] }}
+                                    </td>
+                                    <td>
+                                        {{ $it['evidance'] }}
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary" data-evidance-code="{{ $it['evidance_code'] }}">Quartals</button>
+                                    </td>
                                 </tr>
                             @endforeach
 
                         @endforeach
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+
                 <div class="form-group">
                     <a class="btn btn-primary mt-2" href="{{ route('admin.core-risks.index') }}">
                         {{ trans('global.back_to_list') }}
