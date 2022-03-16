@@ -56,24 +56,29 @@
             <!-- Greetings Card ends -->
         </div>
 
-        <div class="row">
-            <!-- Area Chart starts -->
-            <div class="col-md-12">
-                <div class="card" id="products-statistics">
-                    <div class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
-                        <div>
-                            <h4 class="card-title">Products Statistics</h4>
-                            <span class="card-subtitle text-muted">Yearly products statistic.</span>
-                        </div>
-                        <div class="align-items-center">
-                        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="
+            card-header
+            d-flex
+            flex-sm-row flex-column
+            justify-content-md-between
+            align-items-start
+            justify-content-start
+          ">
+                    <div>
+                        <h4 class="card-title">Line Chart</h4>
+                        <span class="card-subtitle text-muted">Commercial networks</span>
                     </div>
-                    <div class="card-body">
-                        <div id="products-statistics-chart"></div>
+                    <div class="d-flex align-items-center">
+                        <i class="font-medium-2" data-feather="calendar"></i>
+                        <input type="text" class="form-control flat-picker bg-transparent border-0 shadow-none" placeholder="YYYY-MM-DD" />
                     </div>
                 </div>
+                <div class="card-body">
+                    <div id="line-area-chart"></div>
+                </div>
             </div>
-            <!-- Area Chart ends -->
         </div>
 
         <div class="row match-height">
@@ -102,9 +107,11 @@
     <script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.time.js')) }}"></script>
     <script src="{{ asset(mix('vendors/js/pickers/pickadate/legacy.js')) }}"></script>
     <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/charts/apexcharts.js')) }}"></script>
 @endsection
 @section('page-script')
     <!-- Page js files -->
     <script src="{{ asset(mix('js/scripts/forms/pickers/form-pickers.js')) }}"></script>
+    <script src="{{ asset(mix('js/scripts/charts/chart-apex.js')) }}"></script>
 
 @endsection
