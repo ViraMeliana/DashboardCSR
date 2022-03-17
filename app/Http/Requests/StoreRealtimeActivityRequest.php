@@ -9,11 +9,6 @@ use Illuminate\Http\Response;
 
 class StoreRealtimeActivityRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return Gate::allows('realtime_activity_create');
-    }
-
     public function rules()
     {
         return [

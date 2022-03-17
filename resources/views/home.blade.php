@@ -45,10 +45,10 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <h1 class="mb-1 text-white">Congratulations John,</h1>
-                            <p class="card-text m-auto w-75">
-                                You have done <strong>57.6%</strong> more sales today. Check your new badge in your profile.
-                            </p>
+                            <h1 class="mb-1 text-white">Welcome {{auth()->user()->name}}</h1>
+{{--                            <p class="card-text m-auto w-75">--}}
+{{--                                You have done <strong>57.6%</strong> more sales today. Check your new badge in your profile.--}}
+{{--                            </p>--}}
                         </div>
                     </div>
                 </div>

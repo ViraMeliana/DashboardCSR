@@ -25,11 +25,18 @@
                             <ul>
                                 <li>
                                     <div class="w-10">
-                                        <img src="{{asset('landing-assets/images/about/4.png')}}" alt="contact">
+                                        <h6>Lokasi Kegiatan</h6>
+                                        <p>{{ $realtimeActivity->location}}, {{$realtimeActivity->village}}, {{$realtimeActivity->subdistrict}}, {{$realtimeActivity->district}}, {{$realtimeActivity->province}}</p>
                                     </div>
-                                    <div class="w-25">
-                                        <h6>Our Location</h6>
-                                        <p>218 Sahera Tropical Center Room#7 <br> New Elephant Road 1205</p>
+                                </li>
+                                <li>
+                                    <div class="w-10">
+                                        <h6>{{$realtimeActivity->number_of_beneficiaries}} Penerima Manfaat</h6>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="w-10">
+                                        <h6>{{$realtimeActivity->receiver}} Penerima Bantuan</h6>
                                     </div>
                                 </li>
                             </ul>

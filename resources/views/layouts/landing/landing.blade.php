@@ -120,6 +120,13 @@
                             </li>
                             <li><a href="{{route('landing.activity')}}">Activity</a>
                             </li>
+                            @if(auth()->id())
+                                <li><a href="{{route('admin.home')}}">Dashboard</a>
+                                </li>
+                            @else
+                                <li><a href="{{url('/login')}}">Login</a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
