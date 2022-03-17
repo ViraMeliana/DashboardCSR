@@ -14,6 +14,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use SpreadsheetReader;
 use Symfony\Component\HttpFoundation\Response;
 
 class TjslController extends Controller
@@ -78,27 +79,67 @@ class TjslController extends Controller
                 if ($pilar->id == $item->pilar_id) {
                     $toShow[$pilar->name][] = $item->toArray();
 
-                    isset($toShow[$pilar->name.'-rka']) ? $toShow[$pilar->name.'-rka'] += (int)$item->rka : $toShow[$pilar->name.'-rka'] = (int)$item->rka;
-                    isset($toShow[$pilar->name.'-cash-out']) ? $toShow[$pilar->name.'-cash-out'] += (int)$item->cash_out : $toShow[$pilar->name.'-cash-out'] = (int)$item->cash_out;
-                    isset($toShow[$pilar->name.'-commited']) ? $toShow[$pilar->name.'-commited'] += (int)$item->commited : $toShow[$pilar->name.'-commited'] = (int)$item->commited;
-                    isset($toShow[$pilar->name.'-realization']) ? $toShow[$pilar->name.'-realization'] += (int)$item->realization : $toShow[$pilar->name.'-realization'] = (int)$item->realization;
+                    isset($toShow[$pilar->name . '-rka']) ? $toShow[$pilar->name . '-rka'] += (int)$item->rka : $toShow[$pilar->name . '-rka'] = (int)$item->rka;
+                    isset($toShow[$pilar->name . '-cash-out']) ? $toShow[$pilar->name . '-cash-out'] += (int)$item->cash_out : $toShow[$pilar->name . '-cash-out'] = (int)$item->cash_out;
+                    isset($toShow[$pilar->name . '-commited']) ? $toShow[$pilar->name . '-commited'] += (int)$item->commited : $toShow[$pilar->name . '-commited'] = (int)$item->commited;
+                    isset($toShow[$pilar->name . '-realization']) ? $toShow[$pilar->name . '-realization'] += (int)$item->realization : $toShow[$pilar->name . '-realization'] = (int)$item->realization;
                 }
             }
 
-            isset($toShow['rka-all']) ? $toShow['rka-all'] += $toShow[$pilar->name.'-rka']
-                : $toShow['rka-all'] = $toShow[$pilar->name.'-rka'] ;
+            isset($toShow['rka-all']) ? $toShow['rka-all'] += $toShow[$pilar->name . '-rka']
+                : $toShow['rka-all'] = $toShow[$pilar->name . '-rka'];
 
-            isset($toShow['cash-out-all']) ? $toShow['cash-out-all'] += $toShow[$pilar->name.'-cash-out']
-                : $toShow['cash-out-all'] = $toShow[$pilar->name.'-cash-out'] ;
+            isset($toShow['cash-out-all']) ? $toShow['cash-out-all'] += $toShow[$pilar->name . '-cash-out']
+                : $toShow['cash-out-all'] = $toShow[$pilar->name . '-cash-out'];
 
-            isset($toShow['commited-all']) ? $toShow['commited-all'] += $toShow[$pilar->name.'-commited']
-                : $toShow['commited-all'] = $toShow[$pilar->name.'-commited'];
+            isset($toShow['commited-all']) ? $toShow['commited-all'] += $toShow[$pilar->name . '-commited']
+                : $toShow['commited-all'] = $toShow[$pilar->name . '-commited'];
 
-            isset($toShow['realization-all']) ? $toShow['realization-all'] += $toShow[$pilar->name.'-realization']
-                : $toShow['realization-all'] = $toShow[$pilar->name.'-realization'];
+            isset($toShow['realization-all']) ? $toShow['realization-all'] += $toShow[$pilar->name . '-realization']
+                : $toShow['realization-all'] = $toShow[$pilar->name . '-realization'];
         }
 
         return view('admin.tjsls.show', compact('toShow'));
+    }
+
+    public function showChart(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $pilar = Pilar::all();
+
+            $result['category'] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Agu', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            foreach ($pilar as $c) {
+                $per_month = [];
+
+                for ($i = 1; $i <= 12; $i++) {
+                    $tjls = Tjsl::with('tpbs')->whereMonth('created_at', $i)
+                        ->whereYear('created_at', Carbon::now()->year)->first();
+
+
+                    if ($tjls) {
+                        $to_count = 0;
+
+                        foreach ($tjls->tpbs as $tjl) {
+                            if ($tjl->pilar_id == $c->id) {
+                                $to_count += $tjl->realization;
+                            }
+                        }
+
+                        $per_month[] = $to_count;
+                    } else {
+                        $per_month[] = 0;
+                    }
+                }
+
+                $result['series'][] = ['name' => $c->name, 'data' => $per_month];
+            }
+
+            return json_encode($result);
+        }
+
+        return back();
     }
 
     public function processCsvImport(Request $request)
@@ -199,7 +240,8 @@ class TjslController extends Controller
         }
     }
 
-    public function formatter($toFormat) : string {
+    public function formatter($toFormat): string
+    {
         return preg_replace('/[^0-9]/', '', $toFormat);
     }
 

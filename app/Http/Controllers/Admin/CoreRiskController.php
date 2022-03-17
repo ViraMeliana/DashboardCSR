@@ -264,6 +264,45 @@ class CoreRiskController extends Controller
         return redirect()->route('admin.core-risks.index');
     }
 
+    public function showQuartal(Request $request) {
+        if ($request->has('evidance_id') && $request->ajax()) {
+            $quartalEvidence = Evidance::with('quartals')->where('id', $request->evidance_id)->first();
+
+            $quartalEvidanceView = view('partials.quartalShowActions', compact('quartalEvidence'))->render();
+
+            return response()->json([
+                'data' => $quartalEvidanceView
+            ]);
+        }
+
+        return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function updateQuartal(Request $request) {
+        if ($request->has('evidance_id')) {
+            $evidance = Evidance::with('quartals')->where('id', $request->evidance_id)->first();
+
+            if ($evidance) {
+                $evidanceId = $evidance->quartals->pluck('id');
+                $quartalEvidance = EvidanceQuartal::create([
+                    'status' => $request->status ?? '',
+                    'date' => $request->date ?? '',
+                    'quartal' => $request->quartal ?? '',
+                ]);
+
+                if ($quartalEvidance) {
+                    $evidanceId[] = $quartalEvidance->id;
+                    $evidance->quartals()->sync($evidanceId);
+                }
+
+            }
+
+            return redirect()->back();
+        }
+
+        return response(null, Response::HTTP_NO_CONTENT);
+    }
+
     public function show(CoreRisk $coreRisk)
     {
         abort_if(Gate::denies('core_risk_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -289,7 +328,8 @@ class CoreRiskController extends Controller
                         'mitigation_category' => $sameMitigation ? '' :$mitigation->category,
                         'mitigation' => $sameMitigation ? '' :$mitigation->subject,
                         'evidance' => $evidance->subject,
-                        'evidance_code' => $evidance->code
+                        'evidance_code' => $evidance->code,
+                        'evidance_id' => $evidance->id
                     ];
 
                     $sameMitigation = true;

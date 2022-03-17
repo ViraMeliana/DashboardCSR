@@ -4,10 +4,12 @@
 
 @section('vendor-style')
     {{-- vendor css files --}}
+    <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
 @endsection
 
 @section('page-style')
     {{-- Page Css files --}}
+    <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/pickers/form-flat-pickr.css')) }}">
 @endsection
 
 @section('content')
@@ -36,7 +38,7 @@
                                 <th>Mitigation</th>
                                 <th>Code</th>
                                 <th>Evidance</th>
-                                <th>Action</th>
+                                <th>Quartal</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,7 +70,13 @@
                                         {{ $it['evidance'] }}
                                     </td>
                                     <td>
-                                        <button class="btn btn-primary" data-evidance-code="{{ $it['evidance_code'] }}">Quartals</button>
+                                        <a class="btn btn-primary mb-1 edit-button" data-evidance="{{ $it['evidance_id'] }}">
+                                            <i data-feather="settings"></i>
+                                        </a>
+
+                                        <a class="btn btn-outline-primary mb-1 show-button" data-evidance="{{ $it['evidance_id'] }}">
+                                            <i data-feather="eye"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -87,13 +95,41 @@
         </div>
     </div>
 
+    @include('admin.coreRisks.modal.quartal')
+    @include('admin.coreRisks.modal.quartalShow')
+
 @endsection
 
 @section('vendor-script')
     {{-- vendor files --}}
+    <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
 @endsection
 
 
 @section('page-script')
+    <script src="{{ asset(mix('js/scripts/forms/pickers/form-pickers.js')) }}"></script>
+    <script>
+        $(function () {
+            $('.edit-button').on('click', function () {
+                let editModal = $('#editModal');
 
+                editModal.find('#evidance_id').val($(this).data('evidance'));
+                editModal.modal('show')
+            });
+
+            $('.show-button').on('click', function () {
+                let showModal = $('#showModal');
+
+                $.post('{{ route('admin.core-risks.showQuartal') }}', {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    evidance_id: $(this).data('evidance')
+                }, function (data, status) {
+                    if(status) {
+                        $('.table-quartal-show tbody').html(data.data);
+                        showModal.modal('show')
+                    }
+                })
+            });
+        })
+    </script>
 @endsection

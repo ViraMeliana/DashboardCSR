@@ -142,6 +142,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Tjsl
     Route::delete('tjsls/destroy', 'TjslController@massDestroy')->name('tjsls.massDestroy');
     Route::post('tjsls/process-csv-import', 'TjslController@processCsvImport')->name('tjsls.processCsvImport');
+    Route::post('tjsls/show-cart', 'TjslController@showChart')->name('tjsls.showChart');
     Route::resource('tjsls', 'TjslController');
 
     // Realtime Activity
@@ -155,6 +156,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('core-risks', 'CoreRiskController');
     Route::post('core-risks/parse-csv-import', 'CoreRiskController@parseCsvImport')->name('core-risks.parseCsvImport');
     Route::post('core-risks/process-csv-import', 'CoreRiskController@processCsvImport')->name('core-risks.processCsvImport');
+
+    Route::post('core-risks/show-quartal', 'CoreRiskController@showQuartal')->name('core-risks.showQuartal');
+    Route::post('core-risks/update-quartal', 'CoreRiskController@updateQuartal')->name('core-risks.updateQuartal');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password

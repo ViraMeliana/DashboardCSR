@@ -14,9 +14,15 @@ class EvidanceQuartal extends Model
     use HasFactory;
 
     public const STATUS_SELECT = [
-        'done'      => 'Done',
-        'ongoing'   => 'Ongoing',
+        'done' => 'Done',
+        'ongoing' => 'Ongoing',
         'cancelled' => 'Cancelled',
+    ];
+    public const QUARTAL_SELECT = [
+        'q1' => 'Q1',
+        'q2' => 'Q2',
+        'q3' => 'Q3',
+        'q4' => 'Q4',
     ];
 
     public $table = 'evidance_quartals';
@@ -31,6 +37,7 @@ class EvidanceQuartal extends Model
     protected $fillable = [
         'evidance_id',
         'description',
+        'quartal',
         'date',
         'status',
         'created_at',

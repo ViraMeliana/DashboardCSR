@@ -641,6 +641,8 @@ return [
             'id_helper'         => ' ',
             'mitigation'        => 'Mitigation',
             'mitigation_helper' => ' ',
+            'quartal'        => 'Quartal',
+            'quartal_helper' => ' ',
             'code'              => 'Code',
             'code_helper'       => ' ',
             'subject'           => 'Subject',

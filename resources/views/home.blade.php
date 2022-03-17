@@ -57,26 +57,24 @@
         </div>
 
         <div class="col-12">
-            <div class="card">
-                <div class="
-            card-header
-            d-flex
-            flex-sm-row flex-column
-            justify-content-md-between
-            align-items-start
-            justify-content-start
-          ">
+            <div class="card" id="tjsl-statistics">
+                <div
+                    class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
                     <div>
-                        <h4 class="card-title">Line Chart</h4>
-                        <span class="card-subtitle text-muted">Commercial networks</span>
+                        <h4 class="card-title">Statistik TJSL Tahunan</h4>
+                        <span
+                            class="card-subtitle text-muted">Detail statistik produk bulanan selama setahun.</span>
                     </div>
-                    <div class="d-flex align-items-center">
-                        <i class="font-medium-2" data-feather="calendar"></i>
-                        <input type="text" class="form-control flat-picker bg-transparent border-0 shadow-none" placeholder="YYYY-MM-DD" />
+                    <div class="align-items-center">
+                        <form data-action="{{ route('admin.tjsls.showChart') }}" id="tjsl-statistic-form"
+                              class="tjsl-statistic-form">
+                            @csrf
+                            <input type="hidden" name="chart_type" value="tjsl_statistic_type">
+                        </form>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="line-area-chart"></div>
+                    <div id="tjsl-statistics-chart"></div>
                 </div>
             </div>
         </div>

@@ -13,6 +13,7 @@ class CreateEvidanceQuartalsTable extends Migration
             $table->date('date')->nullable();
             $table->longText('description')->nullable();
             $table->string('status')->nullable();
+            $table->string('quartal')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
