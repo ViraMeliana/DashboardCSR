@@ -107,8 +107,8 @@
         <td style="width: 0.6006%;"><br></td>
         <td colspan="5" style="width: 29.9146%;">Rekan bisnis :</td>
         <td colspan="4" style="width: 32.0512%;"><br></td>
-        <td style="width: 18.9459%;" class="border-report">Dibuat, tanggal</td>
-        <td style="width: 16.8091%;" class="border-report">Disetujui, tanggal</td>
+        <td style="width: 18.9459%;" class="border-report">Dibuat, </td>
+        <td style="width: 16.8091%;" class="border-report">Disetujui, </td>
         <td style="width: 2.2792%;"><br></td>
     </tr>
     <tr>
@@ -176,7 +176,7 @@
     <tr>
         <td style="width: 0.6006%;"><br></td>
         <td style="width: 3.9039%;"><br></td>
-        <td colspan="3" style="width: 23.077%;">...</td>
+        <td colspan="3" style="width: 23.077%;"></td>
         <td style="width: 4.2734%;"><br></td>
         <td style="width: 8.1196%;"><br></td>
         <td style="width: 4.2735%;"><br></td>

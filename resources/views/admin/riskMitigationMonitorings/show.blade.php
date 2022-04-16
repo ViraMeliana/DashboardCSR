@@ -21,6 +21,22 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.riskMitigationMonitoring.fields.target') }}
+                        </th>
+                        <td>
+                            {{ $riskMitigationMonitoring->target }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.riskMitigationMonitoring.fields.goal') }}
+                        </th>
+                        <td>
+                            {{ $riskMitigationMonitoring->goal }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.riskMitigationMonitoring.fields.proactive_mitigation') }}
                         </th>
                         <td>

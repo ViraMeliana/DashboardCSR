@@ -30,6 +30,8 @@ Route::get('/about', [HomeController::class, 'about'])->name('landing.about');
 Route::get('/activity', [HomeController::class, 'activity'])->name('landing.activity');
 Route::post('/store', [HomeController::class, 'store'])->name('landing.activity.store');
 Route::get('/add-activity', [HomeController::class, 'createActivity'])->name('landing.createActivity');
+Route::post('/realtime-activities/media', [HomeController::class, 'storeMedia'])->name('landing.storeMedia');
+Route::post('/realtime-activities/ckmedia', [HomeController::class, 'storeCKEditorImages'])->name('landing.storeCKEditorImages');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
@@ -62,9 +64,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('business-partners', 'BusinessPartnerController', ['except' => ['show']]);
 
     // Business Partner Document
-    Route::delete('business-partner-documents/destroy', 'BusinessPartnerDocumentController@massDestroy')->name('business-partner-documents.massDestroy');
-    Route::resource('business-partner-documents', 'BusinessPartnerDocumentController', ['except' => ['show']]);
-    Route::get('business-partner-documents/report/{id}/{type}', 'BusinessPartnerDocumentController@report')->name('business-partner-documents.report');
+    Route::delete('business-partner-documents/destroy', 'DocumentManagementController@massDestroy')->name('business-partner-documents.massDestroy');
+    Route::resource('business-partner-documents', 'DocumentManagementController', ['except' => ['show']]);
+    Route::get('business-partner-documents/report/{id}/{type}', 'DocumentManagementController@report')->name('business-partner-documents.report');
 
     // Business Partner Identification
     Route::delete('business-partner-identifications/destroy', 'BusinessPartnerIdentificationController@massDestroy')->name('business-partner-identifications.massDestroy');

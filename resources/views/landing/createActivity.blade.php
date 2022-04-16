@@ -80,6 +80,16 @@
                             <span class="help-block">{{ trans('cruds.realtimeActivity.fields.type_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label class="required" for="quantity">{{ trans('cruds.realtimeActivity.fields.quantity') }}</label>
+                            <input class="form-control {{ $errors->has('quantity') ? 'is-invalid' : '' }}" type="number" name="quantity" id="quantity" value="{{ old('quantity', '') }}" step="1" required>
+                            @if($errors->has('quantity'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('quantity') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.realtimeActivity.fields.quantity_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label class="required" for="total">{{ trans('cruds.realtimeActivity.fields.total') }}</label>
                             <input class="form-control {{ $errors->has('total') ? 'is-invalid' : '' }}" type="number" name="total" id="total" value="{{ old('total', '') }}" step="1" required>
                             @if($errors->has('total'))
@@ -90,8 +100,8 @@
                             <span class="help-block">{{ trans('cruds.realtimeActivity.fields.total_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label class="required">{{ trans('cruds.realtimeActivity.fields.location') }}</label>
-                            <input class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}" type="text" name="location" id="location" value="{{ old('location', '') }}" required>
+                            <label class="location">{{ trans('cruds.realtimeActivity.fields.location') }}</label>
+                            <textarea class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}" type="text" name="location" id="location" required>{{ old('location', '') }}</textarea>
 
                         @if($errors->has('location'))
                                 <div class="invalid-feedback">
@@ -99,66 +109,6 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.realtimeActivity.fields.location_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ trans('cruds.realtimeActivity.fields.village') }}</label>
-                            <select class="form-control {{ $errors->has('village') ? 'is-invalid' : '' }}" name="village" id="village">
-                                <option value disabled {{ old('village', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                                @foreach(App\Models\RealtimeActivity::VILLAGE_SELECT as $key => $label)
-                                    <option value="{{ $key }}" {{ old('village', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('village'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('village') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.realtimeActivity.fields.village_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ trans('cruds.realtimeActivity.fields.subdistrict') }}</label>
-                            <select class="form-control {{ $errors->has('subdistrict') ? 'is-invalid' : '' }}" name="subdistrict" id="subdistrict">
-                                <option value disabled {{ old('subdistrict', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                                @foreach(App\Models\RealtimeActivity::SUBDISTRICT_SELECT as $key => $label)
-                                    <option value="{{ $key }}" {{ old('subdistrict', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('subdistrict'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('subdistrict') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.realtimeActivity.fields.subdistrict_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ trans('cruds.realtimeActivity.fields.district') }}</label>
-                            <select class="form-control {{ $errors->has('district') ? 'is-invalid' : '' }}" name="district" id="district">
-                                <option value disabled {{ old('district', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                                @foreach(App\Models\RealtimeActivity::DISTRICT_SELECT as $key => $label)
-                                    <option value="{{ $key }}" {{ old('district', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('district'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('district') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.realtimeActivity.fields.district_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ trans('cruds.realtimeActivity.fields.province') }}</label>
-                            <select class="form-control {{ $errors->has('province') ? 'is-invalid' : '' }}" name="province" id="province">
-                                <option value disabled {{ old('province', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                                @foreach(App\Models\RealtimeActivity::PROVINCE_SELECT as $key => $label)
-                                    <option value="{{ $key }}" {{ old('province', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('province'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('province') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.realtimeActivity.fields.province_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label class="required" for="receiver">{{ trans('cruds.realtimeActivity.fields.receiver') }}</label>
@@ -214,10 +164,11 @@
 
 @endsection
 @section('scripts')
+
     <script>
         var uploadedPhotoMap = {}
         Dropzone.options.photoDropzone = {
-            url: '{{ route('admin.realtime-activities.storeMedia') }}',
+            url: '{{ route('landing.storeMedia') }}',
             maxFilesize: 4, // MB
             acceptedFiles: '.jpeg,.jpg,.png,.gif',
             addRemoveLinks: true,

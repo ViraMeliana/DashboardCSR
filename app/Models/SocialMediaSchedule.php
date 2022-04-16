@@ -25,7 +25,7 @@ class SocialMediaSchedule extends Model implements HasMedia
     public $table = 'social_media_schedules';
 
     protected $appends = [
-        'media',
+        'photos',
     ];
 
     protected $dates = [
@@ -62,9 +62,9 @@ class SocialMediaSchedule extends Model implements HasMedia
         $this->attributes['date'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 
-    public function getMediaAttribute()
+    public function getPhotosAttribute()
     {
-        $files = $this->getMedia('media');
+        $files = $this->getMedia('photos');
         $files->each(function ($item) {
             $item->url = $item->getUrl();
             $item->thumbnail = $item->getUrl('thumb');

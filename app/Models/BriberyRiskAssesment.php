@@ -78,7 +78,7 @@ class BriberyRiskAssesment extends Model implements HasMedia
 
     public function business_document()
     {
-        return $this->belongsTo(BusinessPartnerDocument::class, 'document_id');
+        return $this->belongsTo(DocumentManagement::class, 'document_id');
     }
 
     public function personal_identification()

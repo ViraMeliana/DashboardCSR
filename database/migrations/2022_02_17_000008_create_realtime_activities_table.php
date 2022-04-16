@@ -13,12 +13,9 @@ class CreateRealtimeActivitiesTable extends Migration
             $table->string('title');
             $table->date('date');
             $table->string('type');
+            $table->integer('quantity');
             $table->integer('total');
-            $table->string('location');
-            $table->string('village')->nullable();
-            $table->string('subdistrict')->nullable();
-            $table->string('district')->nullable();
-            $table->string('province')->nullable();
+            $table->longText('location');
             $table->string('receiver');
             $table->integer('number_of_beneficiaries')->nullable();
             $table->longText('description');

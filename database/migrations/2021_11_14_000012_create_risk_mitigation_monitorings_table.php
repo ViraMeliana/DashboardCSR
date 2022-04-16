@@ -19,6 +19,9 @@ class CreateRiskMitigationMonitoringsTable extends Migration
             $table->integer('l')->nullable();
             $table->integer('c')->nullable();
             $table->string('risk_level')->nullable();
+            $table->integer('l_after')->nullable();
+            $table->integer('c_after')->nullable();
+            $table->string('risk_level_after')->nullable();
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();

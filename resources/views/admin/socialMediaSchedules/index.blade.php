@@ -89,7 +89,7 @@
                                         {{ App\Models\SocialMediaSchedule::TYPE_RADIO[$socialMediaSchedule->type] ?? '' }}
                                     </td>
                                     <td>
-                                        @foreach($socialMediaSchedule->media as $key => $media)
+                                        @foreach($socialMediaSchedule->photos as $key => $media)
                                             <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
                                                 <img src="{{ $media->getUrl('thumb') }}">
                                             </a>

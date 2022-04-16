@@ -11,6 +11,8 @@ class AddRelationshipFieldsToRiskMitigationMonitoringsTable extends Migration
         Schema::table('risk_mitigation_monitorings', function (Blueprint $table) {
             $table->unsignedBigInteger('responsible_id');
             $table->foreign('responsible_id', 'responsible_fk_5335259')->references('id')->on('users');
+            $table->unsignedBigInteger('document_id');
+            $table->foreign('document_id', 'document_management_fk_5335259')->references('id')->on('document_managements');
         });
     }
 }

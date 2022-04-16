@@ -39,8 +39,8 @@ class SocialMediaScheduleController extends Controller
     {
         $socialMediaSchedule = SocialMediaSchedule::create($request->all());
 
-        foreach ($request->input('media', []) as $file) {
-            $socialMediaSchedule->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('media');
+        foreach ($request->input('photos', []) as $file) {
+            $socialMediaSchedule->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('photos');
         }
 
         if ($media = $request->input('ck-media', false)) {
@@ -61,17 +61,17 @@ class SocialMediaScheduleController extends Controller
     {
         $socialMediaSchedule->update($request->all());
 
-        if (count($socialMediaSchedule->media) > 0) {
-            foreach ($socialMediaSchedule->media as $media) {
-                if (!in_array($media->file_name, $request->input('media', []))) {
+        if (count($socialMediaSchedule->photos) > 0) {
+            foreach ($socialMediaSchedule->photos as $media) {
+                if (!in_array($media->file_name, $request->input('photos', []))) {
                     $media->delete();
                 }
             }
         }
-        $media = $socialMediaSchedule->media->pluck('file_name')->toArray();
-        foreach ($request->input('media', []) as $file) {
+        $media = $socialMediaSchedule->photos->pluck('file_name')->toArray();
+        foreach ($request->input('photos', []) as $file) {
             if (count($media) === 0 || !in_array($file, $media)) {
-                $socialMediaSchedule->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('media');
+                $socialMediaSchedule->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('photos');
             }
         }
 

@@ -54,7 +54,7 @@ class BusinessPartnerIdentification extends Model
 
     public function business_document()
     {
-        return $this->belongsTo(BusinessPartnerDocument::class, 'document_id');
+        return $this->belongsTo(DocumentManagement::class, 'document_id');
     }
 
     public function getValidateDateAttribute($value)

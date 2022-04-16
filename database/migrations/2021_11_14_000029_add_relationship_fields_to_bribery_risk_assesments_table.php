@@ -13,6 +13,8 @@ class AddRelationshipFieldsToBriberyRiskAssesmentsTable extends Migration
             $table->foreign('atp_process_id', 'atp_process_fk_5335121')->references('id')->on('atp_processes');
             $table->unsignedBigInteger('personal_identification_id');
             $table->foreign('personal_identification_id', 'personal_identification_fk_5335145')->references('id')->on('positions');
+            $table->unsignedBigInteger('document_id');
+            $table->foreign('document_id', 'document_management_fk_5335445')->references('id')->on('document_managements');
         });
     }
 }

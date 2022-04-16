@@ -48,6 +48,38 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-12">
                                 <div class="mb-1">
+                                    <label class="required" for="target">{{ trans('cruds.riskMitigationMonitoring.fields.target') }}</label>
+                                    <input class="form-control {{ $errors->has('target') ? 'is-invalid' : '' }}" type="text" name="target" id="target" value="{{ old('target', $riskMitigationMonitoring->target) }}" required>
+                                    @if($errors->has('target'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('target') }}
+                                        </div>
+                                    @endif
+                                    <p><small
+                                            class="text-muted">{{ trans('cruds.riskMitigationMonitoring.fields.target_helper') }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-12">
+                                <div class="mb-1">
+                                    <label class="required" for="goal">{{ trans('cruds.riskMitigationMonitoring.fields.goal') }}</label>
+                                    <input class="form-control {{ $errors->has('goal') ? 'is-invalid' : '' }}" type="text" name="goal" id="goal" value="{{ old('goal', $riskMitigationMonitoring->goal) }}" required>
+                                    @if($errors->has('goal'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('goal') }}
+                                        </div>
+                                    @endif
+                                    <p><small
+                                            class="text-muted">{{ trans('cruds.riskMitigationMonitoring.fields.goal_helper') }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-12">
+                                <div class="mb-1">
                                     <label class="required" for="proactive_mitigation">{{ trans('cruds.riskMitigationMonitoring.fields.proactive_mitigation') }}</label>
                                     <input class="form-control {{ $errors->has('proactive_mitigation') ? 'is-invalid' : '' }}" type="text" name="proactive_mitigation" id="proactive_mitigation" value="{{ old('proactive_mitigation', $riskMitigationMonitoring->proactive_mitigation) }}" required>
                                     @if($errors->has('proactive_mitigation'))
@@ -65,7 +97,7 @@
                             <div class="col-xl-12 col-md-12 col-12">
                                 <div class="mb-1">
                                     <label class="required" for="plan_date">{{ trans('cruds.riskMitigationMonitoring.fields.plan_date') }}</label>
-                                    <input class="form-control date {{ $errors->has('plan_date') ? 'is-invalid' : '' }}" type="text" name="plan_date" id="plan_date" value="{{ old('plan_date', $riskMitigationMonitoring->plan_date) }}" required>
+                                    <input class="form-control  {{ $errors->has('plan_date') ? 'is-invalid' : '' }}" type="date" name="plan_date" id="plan_date" value="{{ old('plan_date', $riskMitigationMonitoring->plan_date) }}" required>
                                     @if($errors->has('plan_date'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('plan_date') }}
@@ -81,7 +113,7 @@
                             <div class="col-xl-12 col-md-12 col-12">
                                 <div class="mb-1">
                                     <label for="realization_date">{{ trans('cruds.riskMitigationMonitoring.fields.realization_date') }}</label>
-                                    <input class="form-control date {{ $errors->has('realization_date') ? 'is-invalid' : '' }}" type="text" name="realization_date" id="realization_date" value="{{ old('realization_date', $riskMitigationMonitoring->realization_date) }}">
+                                    <input class="form-control date {{ $errors->has('realization_date') ? 'is-invalid' : '' }}" type="date" name="realization_date" id="realization_date" value="{{ old('realization_date', $riskMitigationMonitoring->realization_date) }}">
                                     @if($errors->has('realization_date'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('realization_date') }}
@@ -149,7 +181,7 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-12">
                                 <div class="mb-1">
-                                    <label for="l_after">{{ trans('cruds.riskMitigationMonitoring.fields.l') }}</label>
+                                    <label for="l_after">{{ trans('cruds.riskMitigationMonitoring.fields.l_after') }}</label>
                                     <input class="form-control {{ $errors->has('l') ? 'is-invalid' : '' }}" type="number" name="l_after" id="l" value="{{ old('l_after', $riskMitigationMonitoring->l_after) }}" step="1">
                                     @if($errors->has('l_after'))
                                         <div class="invalid-feedback">
@@ -165,7 +197,7 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-12">
                                 <div class="mb-1">
-                                    <label for="c_after">{{ trans('cruds.riskMitigationMonitoring.fields.c') }}</label>
+                                    <label for="c_after">{{ trans('cruds.riskMitigationMonitoring.fields.c_after') }}</label>
                                     <input class="form-control {{ $errors->has('c_after') ? 'is-invalid' : '' }}" type="number" name="c_after" id="c_after" value="{{ old('c', $riskMitigationMonitoring->c_after) }}" step="1">
                                     @if($errors->has('c_after'))
                                         <div class="invalid-feedback">
@@ -181,7 +213,7 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-12">
                                 <div class="mb-1">
-                                    <label>{{ trans('cruds.riskMitigationMonitoring.fields.risk_level') }}</label>
+                                    <label>{{ trans('cruds.riskMitigationMonitoring.fields.risk_level_after') }}</label>
                                     <select class="form-control {{ $errors->has('risk_level_after') ? 'is-invalid' : '' }}" name="risk_level_after" id="risk_level_after">
                                         <option value disabled {{ old('risk_level_after', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
                                         @foreach(App\Models\RiskMitigationMonitoring::RISK_LEVEL_SELECT as $key => $label)

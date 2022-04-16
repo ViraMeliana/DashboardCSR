@@ -44,14 +44,6 @@
                                     Document Name
                                 </th>
                                 <th>
-                                    Note
-                                </th>
-                                <th>
-                                    Validate
-                                </th>
-                                <th>
-                                    Validate Date
-                                </th>
                                 <th>
                                     Document Type
                                 </th>
@@ -126,9 +118,6 @@
                 columns: [
                     { data: 'placeholder', name: 'placeholder' },
                     { data: 'document_number', name: 'document_number' },
-                    { data: 'validate', name: 'validate' },
-                    { data: 'validate_date', name: 'validate_date' },
-                    { data: 'note', name: 'note' },
                     { data: 'type', name: 'type' },
                     { data: 'actions', name: '{{ trans('global.actions') }}' }
                 ],

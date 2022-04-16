@@ -14,7 +14,7 @@ class SocialMediaCalendarController extends Controller
             'field'      => 'event',
             'prefix'     => 'Event',
             'suffix'     => 'will start',
-            'route'      => 'admin.social-media-schedules.edit',
+            'route'      => 'admin.social-media-schedules.show',
         ],
     ];
 

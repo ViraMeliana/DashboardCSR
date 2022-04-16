@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BusinessPartnerDocument extends Model
+class DocumentManagement extends Model
 {
     use SoftDeletes;
     use HasFactory;
 
-    public $table = 'business_partner_document';
+    public $table = 'document_managements';
 
     protected $dates = [
         'created_at',

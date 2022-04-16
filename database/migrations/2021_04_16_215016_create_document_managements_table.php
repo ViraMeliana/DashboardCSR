@@ -4,16 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHumanResourcesTable extends Migration
+class CreateDocumentManagementsTable extends Migration
 {
     public function up()
     {
-        Schema::create('human_resources', function (Blueprint $table) {
+        Schema::create('document_managements', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('competence');
-            $table->string('awareness');
-            $table->longText('scope');
-            $table->longText('jobdesc');
+            $table->string('document_number');
+            $table->string('type');
             $table->timestamps();
             $table->softDeletes();
         });

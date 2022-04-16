@@ -17,21 +17,6 @@ class RealtimeActivity extends Model implements HasMedia
     use InteractsWithMedia;
     use HasFactory;
 
-    public const VILLAGE_SELECT = [
-    ];
-
-    public const LOCATION_SELECT = [
-    ];
-
-    public const DISTRICT_SELECT = [
-    ];
-
-    public const PROVINCE_SELECT = [
-    ];
-
-    public const SUBDISTRICT_SELECT = [
-    ];
-
     public const TYPE_SELECT = [
         'uang'   => 'Uang',
         'barang' => 'Barang',
@@ -54,12 +39,9 @@ class RealtimeActivity extends Model implements HasMedia
         'title',
         'date',
         'type',
+        'quantity',
         'total',
         'location',
-        'village',
-        'subdistrict',
-        'district',
-        'province',
         'receiver',
         'number_of_beneficiaries',
         'description',

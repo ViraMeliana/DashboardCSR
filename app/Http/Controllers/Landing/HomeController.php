@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Landing;
 
 use App\Http\Requests\StoreRealtimeActivityRequest;
 use App\Models\RealtimeActivity;
+use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Symfony\Component\HttpFoundation\Response;
 
 class HomeController
 {
@@ -33,6 +35,15 @@ class HomeController
         }
 
         return redirect()->route('landing.activity');
+    }
+    public function storeCKEditorImages(Request $request)
+    {
+        $model         = new RealtimeActivity();
+        $model->id     = $request->input('crud_id', 0);
+        $model->exists = true;
+        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
+
+        return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }
     public function activity()
     {

@@ -47,11 +47,16 @@ class RiskMitigationMonitoring extends Model implements HasMedia
 
     protected $fillable = [
         'proactive_mitigation',
+        'target',
+        'goal',
         'plan_date',
         'realization_date',
         'l',
         'c',
         'risk_level',
+        'l_after',
+        'c_after',
+        'risk_level_after',
         'responsible_id',
         'document_id',
         'status',
@@ -88,7 +93,7 @@ class RiskMitigationMonitoring extends Model implements HasMedia
 
     public function business_document()
     {
-        return $this->belongsTo(BusinessPartnerDocument::class, 'document_id');
+        return $this->belongsTo(DocumentManagement::class, 'document_id');
     }
 
     public function responsible()

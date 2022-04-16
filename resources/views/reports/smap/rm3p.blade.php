@@ -68,19 +68,19 @@
         <td style="width: 1.9605%;"><br></td>
         <td style="width: 1.5474%;">Target<br></td>
         <td style="width: 1.5474%;">:<br></td>
-        <td colspan="56" style="width: 95.5996%;">{{$business_document->target}}<br></td>
+        <td colspan="56" style="width: 95.5996%;">{{$risk_mitigation[0]->target}}<br></td>
     </tr>
     <tr>
         <td style="width: 1.9605%;"><br></td>
         <td style="width: 1.5474%;">Tujuan<br></td>
         <td style="width: 1.5474%;">:<br></td>
-        <td colspan="56" style="width: 95.5996%;">{{$business_document->goal}}<br></td>
+        <td colspan="56" style="width: 95.5996%;">{{$risk_mitigation[0]->goal}}<br></td>
     </tr>
     <tr>
         <td style="width: 1.9605%;"><br></td>
         <td style="width: 1.5474%;">Revisi<br></td>
         <td style="width: 1.5474%;">:<br></td>
-        <td colspan="56" style="width: 95.5996%;">{{$business_document->revision}}<br></td>
+        <td colspan="56" style="width: 95.5996%;">{{$business_document->updated_at}}<br></td>
     </tr>
     <tr  class="border-report">
         <td style="width: 0.5%;" rowspan="3">No<br></td>
@@ -160,13 +160,13 @@
     <tr  class="border-report">
         <td style="width: 0.5%;">A<br></td>
         <?php
-        if ($item->actual_date != null){
-        $actual = date("n",strtotime($item->actual_date));
-        $actual_date = date("d",strtotime($item->actual_date));
+        if ($item->realization_date != null){
+        $actual = date("n",strtotime($item->realization_date));
+        $realization_date = date("d",strtotime($item->realization_date));
         if (fmod($date,7) != 0)
-            $actual_day = intdiv($actual_date,7) + 1;
+            $actual_day = intdiv($realization_date,7) + 1;
         else
-            $actual_day = intdiv($actual_date,7);
+            $actual_day = intdiv($realization_date,7);
         } else {
             $actual = 0;
             $actual_day = 0;
@@ -185,24 +185,6 @@
     @endforeach
     <tr>
         <td colspan="59" style="width: 100%;"><br></td>
-    </tr>
-    <tr>
-        <td colspan="10" rowspan="3" style="width: 17.3817%;"><br></td>
-        <td colspan="49" style="width: 83.3883%;">Keterangan :</td>
-    </tr>
-    <tr>
-        <td style="width: 1.8702%; background-color: rgb(250, 197, 28);"><br></td>
-        <td colspan="48" style="width: 81.5182%;"><br></td>
-    </tr>
-    <tr>
-        <td style="width: 1.8702%; background-color: rgb(243, 121, 52);"><br></td>
-        <td colspan="48" style="width: 81.5182%;"><br></td>
-    </tr>
-    <tr>
-        <td colspan="59" style="width: 100%;">Catatan dari:</td>
-    </tr>
-    <tr>
-        <td colspan="59" style="width: 100%;">{{$business_document->note}}</td>
     </tr>
     </tbody>
 </table>

@@ -92,12 +92,12 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-12">
                                 <div class="mb-1">
-                                    <label for="media">{{ trans('cruds.socialMediaSchedules.fields.media') }}</label>
-                                    <div class="needsclick dropzone {{ $errors->has('media') ? 'is-invalid' : '' }}" id="media-dropzone">
+                                    <label for="photos">{{ trans('cruds.socialMediaSchedules.fields.media') }}</label>
+                                    <div class="needsclick dropzone {{ $errors->has('photos') ? 'is-invalid' : '' }}" id="photos-dropzone">
                                     </div>
-                                    @if($errors->has('media'))
+                                    @if($errors->has('photos'))
                                         <div class="invalid-feedback">
-                                            {{ $errors->first('media') }}
+                                            {{ $errors->first('photos') }}
                                         </div>
                                     @endif
                                     <p><small
@@ -146,7 +146,7 @@
     </script>
     <script>
         var uploadedMediaMap = {}
-        Dropzone.options.mediaDropzone = {
+        Dropzone.options.photosDropzone = {
             url: '{{ route('admin.social-media-schedules.storeMedia') }}',
             maxFilesize: 2, // MB
             acceptedFiles: '.jpeg,.jpg,.png,.gif',
@@ -160,7 +160,7 @@
                 height: 4096
             },
             success: function (file, response) {
-                $('form').append('<input type="hidden" name="media[]" value="' + response.name + '">')
+                $('form').append('<input type="hidden" name="photos[]" value="' + response.name + '">')
                 uploadedMediaMap[file.name] = response.name
             },
             removedfile: function (file) {
@@ -172,17 +172,17 @@
                 } else {
                     name = uploadedMediaMap[file.name]
                 }
-                $('form').find('input[name="media[]"][value="' + name + '"]').remove()
+                $('form').find('input[name="photos[]"][value="' + name + '"]').remove()
             },
             init: function () {
-                @if(isset($socialMediaSchedule) && $socialMediaSchedule->media)
-                var files = {!! json_encode($socialMediaSchedule->media) !!}
+                @if(isset($socialMediaSchedule) && $socialMediaSchedule->photos)
+                var files = {!! json_encode($socialMediaSchedule->photos) !!}
                 for (var i in files) {
                     var file = files[i]
                     this.options.addedfile.call(this, file)
                     this.options.thumbnail.call(this, file, file.preview)
                     file.previewElement.classList.add('dz-complete')
-                    $('form').append('<input type="hidden" name="media[]" value="' + file.file_name + '">')
+                    $('form').append('<input type="hidden" name="photos[]" value="' + file.file_name + '">')
                 }
                 @endif
             },

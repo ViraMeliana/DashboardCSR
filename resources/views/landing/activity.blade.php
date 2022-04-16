@@ -13,8 +13,22 @@
                 @foreach($realtimeActivities as $key => $realtimeActivity)
                 <div class="row align-items-center">
                     <div class="col-xl-6 col-12">
-                        <div class="lab-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".2s">
-                            <img src="{{ $realtimeActivity->photo[0]->getUrl() }}" alt="lab-shopapp">
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                @foreach($realtimeActivity->photo as $key => $media)
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" src="{{ $media->getUrl('thumb') }}" alt="First slide">
+                                </div>
+                                @endforeach
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
                     </div>
                     <div class="col-xl-6 col-12">
@@ -26,7 +40,7 @@
                                 <li>
                                     <div class="w-10">
                                         <h6>Lokasi Kegiatan</h6>
-                                        <p>{{ $realtimeActivity->location}}, {{$realtimeActivity->village}}, {{$realtimeActivity->subdistrict}}, {{$realtimeActivity->district}}, {{$realtimeActivity->province}}</p>
+                                        <p>{{ $realtimeActivity->location}}</p>
                                     </div>
                                 </li>
                                 <li>
@@ -36,7 +50,7 @@
                                 </li>
                                 <li>
                                     <div class="w-10">
-                                        <h6>{{$realtimeActivity->receiver}} Penerima Bantuan</h6>
+                                        <h6>{{$realtimeActivity->receiver}} (Penerima Bantuan)</h6>
                                     </div>
                                 </li>
                             </ul>

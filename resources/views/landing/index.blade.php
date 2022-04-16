@@ -30,7 +30,7 @@
                         <h2>Semen Indonesia</h2>
 
                         <div class="button-group">
-                            <a href="#" class="lab-btn"><span>Tambah Aktivitas</span></a>
+                            <a href="/add-activity" class="lab-btn"><span>Tambah Aktivitas</span></a>
                         </div>
                     </div>
                 </div>

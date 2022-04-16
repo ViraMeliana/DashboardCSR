@@ -9,7 +9,7 @@ use App\Http\Requests\StoreBriberyRiskAssesmentRequest;
 use App\Http\Requests\UpdateBriberyRiskAssesmentRequest;
 use App\Models\AtpProcess;
 use App\Models\BriberyRiskAssesment;
-use App\Models\BusinessPartnerDocument;
+use App\Models\DocumentManagement;
 use App\Models\Position;
 use Gate;
 use Illuminate\Http\Request;
@@ -142,7 +142,7 @@ class BriberyRiskAssesmentController extends Controller
         abort_if(Gate::denies('bribery_risk_assesment_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $atp_processes = AtpProcess::pluck('activity', 'id')->prepend(trans('global.pleaseSelect'), '');
-        $business_documents = BusinessPartnerDocument::where('type','=','bribery-risk')->pluck('document_number', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $business_documents = DocumentManagement::where('type','=','bribery-risk')->pluck('document_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $personal_identifications = Position::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -175,7 +175,7 @@ class BriberyRiskAssesmentController extends Controller
         $atp_processes = AtpProcess::pluck('activity', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $personal_identifications = Position::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-        $business_documents = BusinessPartnerDocument::where('type','=','bribery-risk')->pluck('document_number', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $business_documents = DocumentManagement::where('type','=','bribery-risk')->pluck('document_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $briberyRiskAssesment->load('atp_process', 'personal_identification');
 

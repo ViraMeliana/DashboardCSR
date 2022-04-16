@@ -79,7 +79,7 @@
             "submenu": [
                 {
                     "url": "admin.social-media-schedules.index",
-                    "name": "cruds.socialMediaSchedule.title",
+                    "name": "cruds.socialMediaSchedules.title",
                     "icon": "circle",
                     "slug": "admin.social-media-schedules.index",
                     "permission": "social_media_schedule_access"

@@ -543,6 +543,22 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 133,
                 'title' => 'core_risk_access',
             ],
+            [
+                'id'    => 134,
+                'title' => 'social_media_schedule_edit',
+            ],
+            [
+                'id'    => 135,
+                'title' => 'social_media_schedule_create',
+            ],
+            [
+                'id'    => 136,
+                'title' => 'social_media_schedule_show',
+            ],
+            [
+                'id'    => 137,
+                'title' => 'social_media_schedule_delete',
+            ],
         ];
 
         Permission::insert($permissions);

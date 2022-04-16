@@ -7,7 +7,7 @@ use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyRiskMitigationMonitoringRequest;
 use App\Http\Requests\StoreRiskMitigationMonitoringRequest;
 use App\Http\Requests\UpdateRiskMitigationMonitoringRequest;
-use App\Models\BusinessPartnerDocument;
+use App\Models\DocumentManagement;
 use App\Models\RiskMitigationMonitoring;
 use App\Models\User;
 use Gate;
@@ -128,7 +128,7 @@ class RiskMitigationMonitoringController extends Controller
     public function create()
     {
         abort_if(Gate::denies('risk_mitigation_monitoring_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $business_documents = BusinessPartnerDocument::where('type','=','rm3p')->pluck('document_number', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $business_documents = DocumentManagement::where('type','=','rm3p')->pluck('document_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $responsibles = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -163,7 +163,7 @@ class RiskMitigationMonitoringController extends Controller
         abort_if(Gate::denies('risk_mitigation_monitoring_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $responsibles = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-        $business_documents = BusinessPartnerDocument::where('type','=','rm3p')->pluck('document_number', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $business_documents = DocumentManagement::where('type','=','rm3p')->pluck('document_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $riskMitigationMonitoring->load('responsible');
 

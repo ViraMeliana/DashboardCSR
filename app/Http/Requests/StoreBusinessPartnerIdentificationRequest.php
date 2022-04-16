@@ -35,10 +35,6 @@ class StoreBusinessPartnerIdentificationRequest extends FormRequest
                 'string',
                 'required',
             ],
-            'document_number' => [
-                'string',
-                'required',
-            ],
             'smap_implementation' => [
                 'required',
             ],

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\BriberyRiskAssesment;
 use App\Models\BusinessPartner;
-use App\Models\BusinessPartnerDocument;
+use App\Models\DocumentManagement;
 use App\Models\BusinessPartnerIdentification;
 use App\Models\RiskMitigationMonitoring;
 use PDF;
@@ -14,14 +14,14 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
 
-class BusinessPartnerDocumentController extends Controller
+class DocumentManagementController extends Controller
 {
     public function index(Request $request)
     {
         abort_if(Gate::denies('business_partner_identification_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = BusinessPartnerDocument::query()->select(sprintf('%s.*', (new BusinessPartnerDocument())->table));
+            $query = DocumentManagement::query()->select(sprintf('%s.*', (new DocumentManagement())->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -50,12 +50,6 @@ class BusinessPartnerDocumentController extends Controller
             $table->editColumn('document_number', function ($row) {
                 return $row->document_number ? $row->document_number : '';
             });
-            $table->editColumn('validate', function ($row) {
-                return $row->validate ? $row->validate : '';
-            });
-            $table->editColumn('validate_date', function ($row) {
-                return $row->validate_date ? $row->validate_date : '';
-            });
             $table->editColumn('type', function ($row) {
                 return $row->type ? $row->type : '';
             });
@@ -65,38 +59,38 @@ class BusinessPartnerDocumentController extends Controller
             return $table->make(true);
         }
 
-        return view('admin.businessPartnerDocuments.index');
+        return view('admin.documentManagements.index');
     }
 
     public function create()
     {
         abort_if(Gate::denies('business_partner_identification_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.businessPartnerDocuments.create');
+        return view('admin.documentManagements.create');
     }
 
     public function store(Request $request)
     {
-        $businessPartnerDocument = BusinessPartnerDocument::create($request->all());
+        $businessPartnerDocument = DocumentManagement::create($request->all());
 
         return redirect()->route('admin.business-partner-documents.index');
     }
 
-    public function edit(BusinessPartnerDocument $businessPartnerDocument)
+    public function edit(DocumentManagement $businessPartnerDocument)
     {
         abort_if(Gate::denies('business_partner_identification_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.businessPartnerDocuments.edit', compact('businessPartnerDocument'));
+        return view('admin.documentManagements.edit', compact('businessPartnerDocument'));
     }
 
-    public function update(Request $request, BusinessPartnerDocument $businessPartnerDocument)
+    public function update(Request $request, DocumentManagement $businessPartnerDocument)
     {
         $businessPartnerDocument->update($request->all());
 
         return redirect()->route('admin.business-partner-documents.index');
     }
 
-    public function destroy(BusinessPartnerDocument $businessPartnerDocument)
+    public function destroy(DocumentManagement $businessPartnerDocument)
     {
         abort_if(Gate::denies('business_partner_identification_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -107,12 +101,12 @@ class BusinessPartnerDocumentController extends Controller
 
     public function massDestroy(Request $request)
     {
-        BusinessPartnerDocument::whereIn('id', request('ids'))->delete();
+        DocumentManagement::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
     public function report($id, $type){
-        $business_document = BusinessPartnerDocument::all()->where('id',$id)->first();
+        $business_document = DocumentManagement::all()->where('id',$id)->first();
 
         if ($type == 'business-partner') {
             $business_identification = BusinessPartnerIdentification::with(['business_partner','business_document'])->where('document_id',$id)->get();

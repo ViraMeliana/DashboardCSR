@@ -7,7 +7,7 @@ use App\Http\Requests\MassDestroyBusinessPartnerIdentificationRequest;
 use App\Http\Requests\StoreBusinessPartnerIdentificationRequest;
 use App\Http\Requests\UpdateBusinessPartnerIdentificationRequest;
 use App\Models\BusinessPartner;
-use App\Models\BusinessPartnerDocument;
+use App\Models\DocumentManagement;
 use App\Models\BusinessPartnerIdentification;
 use Gate;
 use Illuminate\Http\Request;
@@ -87,7 +87,7 @@ class BusinessPartnerIdentificationController extends Controller
         abort_if(Gate::denies('business_partner_identification_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $business_partners = BusinessPartner::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-        $business_documents = BusinessPartnerDocument::where('type','=','business-partner')->pluck('document_number', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $business_documents = DocumentManagement::where('type','=','business-partner')->pluck('document_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.businessPartnerIdentifications.create', compact('business_partners','business_documents'));
     }
@@ -104,7 +104,7 @@ class BusinessPartnerIdentificationController extends Controller
         abort_if(Gate::denies('business_partner_identification_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $business_partners = BusinessPartner::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-        $business_documents = BusinessPartnerDocument::where('type','=','business-partner')->pluck('document_number', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $business_documents = DocumentManagement::where('type','=','business-partner')->pluck('document_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $businessPartnerIdentification->load('business_partner','business_document');
 
