@@ -1,4 +1,3 @@
-
 @extends('layouts/contentLayoutMaster')
 
 @section('title', 'Dashboard Analytics')
@@ -46,9 +45,6 @@
                         </div>
                         <div class="text-center">
                             <h1 class="mb-1 text-white">Welcome {{auth()->user()->name}}</h1>
-{{--                            <p class="card-text m-auto w-75">--}}
-{{--                                You have done <strong>57.6%</strong> more sales today. Check your new badge in your profile.--}}
-{{--                            </p>--}}
                         </div>
                     </div>
                 </div>
@@ -75,6 +71,36 @@
                 </div>
                 <div class="card-body">
                     <div id="tjsl-statistics-chart"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-6">
+            <div class="card" id="tjsl-statistics-bar">
+                <div class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
+                    <div>
+                        <h4 class="card-title">Statistik RKAP dan REAL</h4>
+                        <span
+                            class="card-subtitle text-muted">Detail statistik rkap dan real selamat setahun.</span>
+                    </div>
+
+                    <div class="align-items-center">
+                        <form data-action="{{ route('admin.tjsls.showChart') }}" id="tjsl-statistic-bar-form"
+                              class="tjsl-statistic-bar-form">
+                            @csrf
+                            <select name="year" class="form-control tjsl-statistic-bar-filter">
+                                @foreach($tjslYear as $index => $value)
+                                    <option value="{{ $value }}"> {{ $index }}</option>
+                                @endforeach
+                            </select>
+
+                            <input type="hidden" name="chart_type" value="tjsl_statistic_bar_type">
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="tjsl-statistics-bar-chart"></div>
                 </div>
             </div>
         </div>

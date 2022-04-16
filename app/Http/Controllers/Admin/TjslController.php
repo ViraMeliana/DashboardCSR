@@ -33,36 +33,26 @@ class TjslController extends Controller
     {
         abort_if(Gate::denies('tjsl_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $tpbs = Tpb::pluck('tpb_number', 'id');
+        return response(null, Response::HTTP_NO_CONTENT);
 
-        return view('admin.tjsls.create', compact('tpbs'));
     }
 
     public function store(StoreTjslRequest $request)
     {
-        $tjsl = Tjsl::create($request->all());
-        $tjsl->tpbs()->sync($request->input('tpbs', []));
-
-        return redirect()->route('admin.tjsls.index');
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 
     public function edit(Tjsl $tjsl)
     {
         abort_if(Gate::denies('tjsl_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $tpbs = Tpb::pluck('tpb_number', 'id');
-
-        $tjsl->load('tpbs');
-
-        return view('admin.tjsls.edit', compact('tjsl', 'tpbs'));
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 
     public function update(UpdateTjslRequest $request, Tjsl $tjsl)
     {
-        $tjsl->update($request->all());
-        $tjsl->tpbs()->sync($request->input('tpbs', []));
 
-        return redirect()->route('admin.tjsls.index');
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 
     public function show(Tjsl $tjsl)
@@ -105,35 +95,85 @@ class TjslController extends Controller
     public function showChart(Request $request)
     {
         if ($request->ajax()) {
+            $result = null;
 
-            $pilar = Pilar::all();
+            if ($request->chart_type == 'tjsl_statistic_type') {
+                $pilar = Pilar::all();
 
-            $result['category'] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Agu', 'Sep', 'Oct', 'Nov', 'Dec'];
+                $result['category'] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Agu', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-            foreach ($pilar as $c) {
-                $per_month = [];
+                foreach ($pilar as $c) {
+                    $per_month = [];
 
-                for ($i = 1; $i <= 12; $i++) {
-                    $tjls = Tjsl::with('tpbs')->whereMonth('created_at', $i)
-                        ->whereYear('created_at', Carbon::now()->year)->first();
+                    for ($i = 1; $i <= 12; $i++) {
+                        $tjls = Tjsl::with('tpbs')->whereMonth('created_at', $i)
+                            ->whereYear('created_at', Carbon::now()->year)->first();
 
 
-                    if ($tjls) {
-                        $to_count = 0;
+                        if ($tjls) {
+                            $to_count = 0;
 
-                        foreach ($tjls->tpbs as $tjl) {
-                            if ($tjl->pilar_id == $c->id) {
-                                $to_count += $tjl->realization;
+                            foreach ($tjls->tpbs as $tjl) {
+                                if ($tjl->pilar_id == $c->id) {
+                                    $to_count += $tjl->realization;
+                                }
                             }
-                        }
 
-                        $per_month[] = $to_count;
+                            $per_month[] = $to_count;
+                        } else {
+                            $per_month[] = 0;
+                        }
+                    }
+
+                    $result['type'] = $request->chart_type;
+                    $result['series'][] = ['name' => $c->name, 'data' => $per_month];
+                }
+            } else if ($request->chart_type == 'tjsl_statistic_bar_type') {
+                $pilars = Pilar::all();
+                $temporary = null;
+
+                foreach ($pilars as $pilar) {
+                    $tjls = Tjsl::with('tpbs')->first();
+
+                    if ($request->year) {
+                        $tjls->whereYear('periode', Carbon::now()->year);
                     } else {
-                        $per_month[] = 0;
+                        $tjls->orderByDesc('periode');
+                    }
+
+                    foreach ($tjls->tpbs as $item) {
+                        if ($pilar->id == $item->pilar_id) {
+
+                            isset($temporary[$pilar->name]['rka']) ?
+                                $temporary[$pilar->name]['rka'] += (int)$item->rka :
+                                $temporary[$pilar->name]['rka'] = (int)$item->rka;
+
+                            isset($temporary[$pilar->name]['realization']) ?
+                                $temporary[$pilar->name]['realization'] += (int)$item->realization :
+                                $temporary[$pilar->name]['realization'] = (int)$item->realization;
+                        }
                     }
                 }
 
-                $result['series'][] = ['name' => $c->name, 'data' => $per_month];
+                $rka = [];
+                $realization = [];
+                foreach ($temporary as $index => $value) {
+                    $rka[] = $value['rka'];
+                    $realization[] = $value['realization'];
+
+                    $result['categories'][] = $index;
+                }
+
+                $result['series'] = [
+                    [
+                        'name' => 'rka',
+                        'data' => $rka],
+                    [
+                        'name' => 'realization',
+                        'data' => $realization
+                    ],
+                ];
+                $result['type'] = $request->chart_type;
             }
 
             return json_encode($result);
@@ -227,7 +267,7 @@ class TjslController extends Controller
                 $insertedId[] = $tpb->id;
             }
 
-            $tjsl = Tjsl::create(['periode' => Carbon::now()->format('Y-m-d')]);
+            $tjsl = Tjsl::create(['periode' => $request->periode ?? Carbon::now()->format('Y-m-d')]);
             $tjsl->tpbs()->sync($insertedId);
 
             File::delete($path);

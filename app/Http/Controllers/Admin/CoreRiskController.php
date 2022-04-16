@@ -32,7 +32,7 @@ class CoreRiskController extends Controller
 
             $table->editColumn('actions', function ($row) {
                 $viewGate = 'core_risk_show';
-                $editGate = 'core_risk_edit';
+                $editGate = 'core_risk_edit_ed';
                 $deleteGate = 'core_risk_delete';
                 $crudRoutePart = 'core-risks';
 
@@ -149,9 +149,9 @@ class CoreRiskController extends Controller
 
             if (isset($insert)) {
                 $coreRisk = CoreRisk::create([
-                    'subject' => 'RISK' . Carbon::now()->format('Y-m-d'),
-                    'description' => 'RISK' . Carbon::now()->format('Y-m-d'),
-                    'year' => Carbon::now()->format('Y-m-d')
+                    'subject' => 'RISK-' . Carbon::now()->format('Y-m-d'),
+                    'description' => 'RISK-' . Carbon::now()->format('Y-m-d'),
+                    'year' => $request->year ?? Carbon::now()->format('Y-m-d')
                 ]);
 
                 if ($coreRisk) {
@@ -240,28 +240,28 @@ class CoreRiskController extends Controller
     {
         abort_if(Gate::denies('core_risk_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.coreRisks.create');
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 
     public function store(StoreCoreRiskRequest $request)
     {
         $coreRisk = CoreRisk::create($request->all());
 
-        return redirect()->route('admin.core-risks.index');
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 
     public function edit(CoreRisk $coreRisk)
     {
         abort_if(Gate::denies('core_risk_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.coreRisks.edit', compact('coreRisk'));
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 
     public function update(UpdateCoreRiskRequest $request, CoreRisk $coreRisk)
     {
         $coreRisk->update($request->all());
 
-        return redirect()->route('admin.core-risks.index');
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 
     public function showQuartal(Request $request) {
@@ -303,6 +303,16 @@ class CoreRiskController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
+    public function extractUsers($users): string
+    {
+        $result = '';
+        foreach ($users as $user) {
+            $result .= ' '. $user->name;
+        }
+
+        return $result;
+    }
+
     public function show(CoreRisk $coreRisk)
     {
         abort_if(Gate::denies('core_risk_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -327,6 +337,7 @@ class CoreRiskController extends Controller
                         'risiko_impact' => $sameRisikos ? '' : $item->impact,
                         'mitigation_category' => $sameMitigation ? '' :$mitigation->category,
                         'mitigation' => $sameMitigation ? '' :$mitigation->subject,
+                        'users' => $sameMitigation ? '' :$this->extractUsers($mitigation->users),
                         'evidance' => $evidance->subject,
                         'evidance_code' => $evidance->code,
                         'evidance_id' => $evidance->id

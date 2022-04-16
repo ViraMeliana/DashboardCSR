@@ -17,9 +17,6 @@
     @can('tjsl_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route('admin.tjsls.create') }}">
-                    {{ trans('global.add') }} {{ trans('cruds.tjsl.title_singular') }}
-                </a>
                 <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#csvImportModal">
                     {{ trans('global.app_csvImport') }}
                 </button>
@@ -44,9 +41,9 @@
                             {{ trans('cruds.tjsl.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.tjsl.fields.tpb') }}
+                            {{ trans('cruds.tpb.fields.periode') }}
                         </th>
-                        <th>
+                        <th style="width: 20%">
                             &nbsp;
                         </th>
                     </tr>
@@ -61,22 +58,15 @@
                                 {{ $tjsl->id ?? '' }}
                             </td>
                             <td>
-                                @foreach($tjsl->tpbs as $key => $item)
-                                    <span class="badge badge-info">{{ $item->tpb_number }}</span>
-                                @endforeach
+                                {{ $tjsl->periode ?? '' }}
                             </td>
                             <td>
                                 @can('tjsl_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.tjsls.show', $tjsl->id) }}">
-                                        {{ trans('global.view') }}
+                                    <a class="btn btn btn-primary" href="{{ route('admin.tjsls.show', $tjsl->id) }}">
+                                        <i data-feather="eye"></i>
                                     </a>
                                 @endcan
 
-                                @can('tjsl_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.tjsls.edit', $tjsl->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
 
                                 @can('tjsl_delete')
                                     <form action="{{ route('admin.tjsls.destroy', $tjsl->id) }}" method="POST"
@@ -84,8 +74,10 @@
                                           style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger"
-                                               value="{{ trans('global.delete') }}">
+
+                                        <button class="btn btn btn-outline-primary" href="javascript:void(0)">
+                                            <i data-feather="trash"></i>
+                                        </button>
                                     </form>
                                 @endcan
 
@@ -110,6 +102,8 @@
 @endsection
 
 @section('page-script')
+    <script src="{{ asset(mix('js/scripts/forms/pickers/form-pickers.js')) }}"></script>
+
     @parent
     <script>
         $(function () {

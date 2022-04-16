@@ -36,6 +36,7 @@
                                 <th>Dampak</th>
                                 <th>Pro/Re</th>
                                 <th>Mitigation</th>
+                                <th>Users</th>
                                 <th>Code</th>
                                 <th>Evidance</th>
                                 <th>Quartal</th>
@@ -62,6 +63,9 @@
                                     </td>
                                     <td>
                                         {{ $it['mitigation'] }}
+                                    </td>
+                                    <td>
+                                        {{ $it['users'] }}
                                     </td>
                                     <td>
                                         {{ $it['evidance_code'] }}

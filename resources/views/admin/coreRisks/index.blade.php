@@ -16,9 +16,6 @@
     @can('core_risk_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route('admin.core-risks.create') }}">
-                    {{ trans('global.add') }} {{ trans('cruds.coreRisk.title_singular') }}
-                </a>
                 <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#csvImportModal">
                     {{ trans('global.app_csvImport') }}
                 </button>
@@ -87,6 +84,8 @@
 
 
 @section('page-script')
+    <script src="{{ asset(mix('js/scripts/forms/pickers/form-pickers.js')) }}"></script>
+
     @parent
     <script>
         $(function () {

@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Tjsl;
+
 class HomeController
 {
     public function index()
     {
-        return view('home');
+        $tjslYear = Tjsl::all()->pluck('periode', 'periode');
+
+        return view('home', compact('tjslYear'));
     }
 }

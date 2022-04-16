@@ -578,5 +578,7 @@
     "/data/kanban.json": "/data/kanban.json",
     "/data/search.json": "/data/search.json",
     "/data/table-datatable.json": "/data/table-datatable.json",
+    "/data/template-risks-core.csv": "/data/template-risks-core.csv",
+    "/data/template-tjsl.csv": "/data/template-tjsl.csv",
     "/data/user-list.json": "/data/user-list.json"
 }
