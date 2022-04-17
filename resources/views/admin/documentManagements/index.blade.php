@@ -44,7 +44,6 @@
                                     Document Name
                                 </th>
                                 <th>
-                                <th>
                                     Document Type
                                 </th>
                                 <th>
