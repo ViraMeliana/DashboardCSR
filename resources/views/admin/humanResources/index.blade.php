@@ -138,7 +138,7 @@
                     { data: 'scope', name: 'scope' },
                     { data: 'jobdesc', name: 'jobdesc' },
                     { data: 'user_name', name: 'user.name' },
-                    { data: 'actions', name: '{{ trans('global.actions') }}' }
+                    {data: 'actions', orderable: false}
                 ],
                 orderCellsTop: true,
                 order: [[ 1, 'desc' ]],

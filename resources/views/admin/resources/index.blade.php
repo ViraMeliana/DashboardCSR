@@ -118,7 +118,7 @@
                     { data: 'placeholder', name: 'placeholder' },
                     { data: 'id', name: 'id' },
                     { data: 'name', name: 'name' },
-                    { data: 'actions', name: '{{ trans('global.actions') }}' }
+                    {data: 'actions', orderable: false}
                 ],
                 orderCellsTop: true,
                 order: [[ 1, 'desc' ]],

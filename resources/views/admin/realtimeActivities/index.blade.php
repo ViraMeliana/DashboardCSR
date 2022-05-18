@@ -1,295 +1,259 @@
-@extends('layouts.admin')
+@extends('layouts/contentLayoutMaster')
+
+@section('title', 'Realtime Activity')
+
+@section('vendor-style')
+    {{-- vendor css files --}}
+    <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/dataTables.bootstrap5.min.css')) }}">
+    <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/responsive.bootstrap5.min.css')) }}">
+    <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
+@endsection
+
+@section('page-style')
+    {{-- Page Css files --}}
+    <link rel="stylesheet" type="text/css" href="{{asset('css/base/plugins/forms/pickers/form-flat-pickr.css')}}">
+@endsection
 @section('content')
-@can('realtime_activity_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.realtime-activities.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.realtimeActivity.title_singular') }}
-            </a>
-        </div>
-    </div>
-@endcan
-<div class="card">
-    <div class="card-header">
-        {{ trans('cruds.realtimeActivity.title_singular') }} {{ trans('global.list') }}
-    </div>
+    <div class="blog-list-wrapper">
+        <!-- Blog List Items -->
+        <div class="row match-height">
+            @can('realtime_activity_create')
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <button type="button"
+                                    class="btn btn-icon btn-icon btn-flat-primary waves-effect h-100 w-100 btn-create-event">
+                                <i data-feather="plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            @endcan
 
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-RealtimeActivity">
-                <thead>
-                    <tr>
-                        <th width="10">
+            @foreach($realtimeActivities as $key => $realtimeActivity)
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="javascript:void(0);">
+                                @if(count($realtimeActivity->photo) > 0)
 
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.id') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.title') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.date') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.type') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.total') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.location') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.village') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.subdistrict') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.district') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.province') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.receiver') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.number_of_beneficiaries') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.photo') }}
-                        </th>
-                        <th>
-                            &nbsp;
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                            <select class="search" strict="true">
-                                <option value>{{ trans('global.all') }}</option>
-                                @foreach(App\Models\RealtimeActivity::TYPE_SELECT as $key => $item)
-                                    <option value="{{ $item }}">{{ $item }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <select class="search" strict="true">
-                                <option value>{{ trans('global.all') }}</option>
-                                @foreach(App\Models\RealtimeActivity::LOCATION_SELECT as $key => $item)
-                                    <option value="{{ $item }}">{{ $item }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <select class="search" strict="true">
-                                <option value>{{ trans('global.all') }}</option>
-                                @foreach(App\Models\RealtimeActivity::VILLAGE_SELECT as $key => $item)
-                                    <option value="{{ $item }}">{{ $item }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <select class="search" strict="true">
-                                <option value>{{ trans('global.all') }}</option>
-                                @foreach(App\Models\RealtimeActivity::SUBDISTRICT_SELECT as $key => $item)
-                                    <option value="{{ $item }}">{{ $item }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <select class="search" strict="true">
-                                <option value>{{ trans('global.all') }}</option>
-                                @foreach(App\Models\RealtimeActivity::DISTRICT_SELECT as $key => $item)
-                                    <option value="{{ $item }}">{{ $item }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <select class="search" strict="true">
-                                <option value>{{ trans('global.all') }}</option>
-                                @foreach(App\Models\RealtimeActivity::PROVINCE_SELECT as $key => $item)
-                                    <option value="{{ $item }}">{{ $item }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($realtimeActivities as $key => $realtimeActivity)
-                        <tr data-entry-id="{{ $realtimeActivity->id }}">
-                            <td>
+                                    <div id="carousel{{$realtimeActivity->id}}Indicators" class="carousel slide"
+                                         data-bs-ride="carousel">
+                                        <div class="carousel-indicators">
+                                            @php
+                                                $count_cover = 0;
+                                            @endphp
 
-                            </td>
-                            <td>
-                                {{ $realtimeActivity->id ?? '' }}
-                            </td>
-                            <td>
-                                {{ $realtimeActivity->title ?? '' }}
-                            </td>
-                            <td>
-                                {{ $realtimeActivity->date ?? '' }}
-                            </td>
-                            <td>
-                                {{ App\Models\RealtimeActivity::TYPE_SELECT[$realtimeActivity->type] ?? '' }}
-                            </td>
-                            <td>
-                                {{ $realtimeActivity->total ?? '' }}
-                            </td>
-                            <td>
-                                {{ App\Models\RealtimeActivity::LOCATION_SELECT[$realtimeActivity->location] ?? '' }}
-                            </td>
-                            <td>
-                                {{ App\Models\RealtimeActivity::VILLAGE_SELECT[$realtimeActivity->village] ?? '' }}
-                            </td>
-                            <td>
-                                {{ App\Models\RealtimeActivity::SUBDISTRICT_SELECT[$realtimeActivity->subdistrict] ?? '' }}
-                            </td>
-                            <td>
-                                {{ App\Models\RealtimeActivity::DISTRICT_SELECT[$realtimeActivity->district] ?? '' }}
-                            </td>
-                            <td>
-                                {{ App\Models\RealtimeActivity::PROVINCE_SELECT[$realtimeActivity->province] ?? '' }}
-                            </td>
-                            <td>
-                                {{ $realtimeActivity->receiver ?? '' }}
-                            </td>
-                            <td>
-                                {{ $realtimeActivity->number_of_beneficiaries ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($realtimeActivity->photo as $key => $media)
-                                    <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $media->getUrl('thumb') }}">
-                                    </a>
-                                @endforeach
-                            </td>
-                            <td>
-                                @can('realtime_activity_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.realtime-activities.show', $realtimeActivity->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
+                                            @foreach($realtimeActivity->photo as $photo)
+                                                <button type="button" data-bs-target="#carousel{{$realtimeActivity->id}}Indicators"
+                                                        data-bs-slide-to="{{$count_cover}}"
+                                                        class="{{$count_cover == 0 ? 'active' : ''}}"
+                                                        aria-current="true"
+                                                        aria-label="Slide {{$count_cover}}">
+                                                </button>
 
+                                                @php
+                                                    $count_cover += 1;
+                                                @endphp
+                                            @endforeach
+
+                                            @php
+                                                $count_cover = 0;
+                                            @endphp
+                                        </div>
+
+                                        <div class="carousel-inner">
+                                            @foreach($realtimeActivity->photo as $key => $media)
+                                                <div class="carousel-item {{$count_cover == 0 ? 'active' : ''}}">
+                                                    <img src="{{ $media->getUrl('preview') }}" class="d-block w-100"
+                                                         alt="{{ $media->getUrl('preview') }}"/>
+                                                </div>
+                                                @php
+                                                    $count_cover += 1;
+                                                @endphp
+                                            @endforeach
+                                        </div>
+
+                                        <button
+                                            class="carousel-control-prev"
+                                            type="button"
+                                            data-bs-target="#carousel{{$realtimeActivity->id}}Indicators"
+                                            data-bs-slide="prev"
+                                        >
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+
+                                        <button
+                                            class="carousel-control-next"
+                                            type="button"
+                                            data-bs-target="#carousel{{$realtimeActivity->id}}Indicators"
+                                            data-bs-slide="next">
+
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                @else
+                                    <img class="card-img-top img-fluid"
+                                         src="{{ asset('images/pages/dummy.jpg') }}"
+                                         alt="Blog Post pic"/>
+                                @endif
+                            </a>
+
+                            <h4 class="card-title">
+                                <a href="javascript:void(0);" class="blog-title-truncate text-body-heading">
+                                    {{ ucwords(strtolower($realtimeActivity->title)) }}
+                                </a>
+                            </h4>
+
+                            <p class="card-text blog-content-truncate">
+                                {{ substr($realtimeActivity->description, 0, 70) }} ...
+                            </p>
+
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-between align-items-center">
                                 @can('realtime_activity_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.realtime-activities.edit', $realtimeActivity->id) }}">
-                                        {{ trans('global.edit') }}
+                                    <a class="btn btn-outline-primary btn-sm waves-effect waves-float waves-light"
+                                       href="{{ route('admin.realtime-activities.edit', $realtimeActivity->id) }}">
+                                        Edit
                                     </a>
                                 @endcan
-
                                 @can('realtime_activity_delete')
-                                    <form action="{{ route('admin.realtime-activities.destroy', $realtimeActivity->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
+                                    <a class="btn btn-outline-danger btn-sm waves-effect waves-float waves-light delete-btn"
+                                       href="javascript:void(0);">
+                                        Delete
+                                    </a>
                                 @endcan
+                                @can('realtime_activity_show')
+                                    <a class="btn btn-primary btn-sm waves-effect waves-float waves-light"
+                                       href="{{ route('admin.realtime-activities.show', $realtimeActivity->id) }}">
+                                        Show
+                                    </a>
+                                @endcan
+                            </div>
 
-                            </td>
-
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                            <form action="{{ route('admin.realtime-activities.destroy', $realtimeActivity->id) }}" method="POST"
+                                  class="delete-form">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
+        <!--/ Blog List Items -->
     </div>
-</div>
 
-
+    {{ $realtimeActivities->links('vendor.pagination.custom') }}
 
 @endsection
-@section('scripts')
-@parent
-<script>
-    $(function () {
-  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('realtime_activity_delete')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
-  let deleteButton = {
-    text: deleteButtonTrans,
-    url: "{{ route('admin.realtime-activities.massDestroy') }}",
-    className: 'btn-danger',
-    action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
-          return $(entry).data('entry-id')
-      });
+@section('vendor-script')
+    {{-- vendor files --}}
+    <script src="{{ asset(mix('vendors/js/tables/datatable/jquery.dataTables.min.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.bootstrap5.min.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/tables/datatable/responsive.bootstrap5.js')) }}"></script>
+    <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
+@endsection
+@section('page-script')
+    @parent
+    <script>
+        $(function () {
+            $('.btn-create-event').on('click', function () {
+                window.location.href = '{{ route('admin.realtime-activities.create') }}'
+            })
 
-      if (ids.length === 0) {
-        alert('{{ trans('global.datatables.zero_selected') }}')
+            $('.delete-btn').on('click', function () {
+                let current_form = $(this).parent().parent().find('form');
 
-        return
-      }
+                if (current_form) {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            current_form.submit();
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+    <script>
+        $(function () {
+            let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+            @can('realtime_activity_delete')
+            let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
+            let deleteButton = {
+                text: deleteButtonTrans,
+                url: "{{ route('admin.realtime-activities.massDestroy') }}",
+                className: 'btn-danger',
+                action: function (e, dt, node, config) {
+                    var ids = $.map(dt.rows({selected: true}).nodes(), function (entry) {
+                        return $(entry).data('entry-id')
+                    });
 
-      if (confirm('{{ trans('global.areYouSure') }}')) {
-        $.ajax({
-          headers: {'x-csrf-token': _token},
-          method: 'POST',
-          url: config.url,
-          data: { ids: ids, _method: 'DELETE' }})
-          .done(function () { location.reload() })
-      }
-    }
-  }
-  dtButtons.push(deleteButton)
-@endcan
+                    if (ids.length === 0) {
+                        alert('{{ trans('global.datatables.zero_selected') }}')
 
-  $.extend(true, $.fn.dataTable.defaults, {
-    orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
-    pageLength: 10,
-  });
-  let table = $('.datatable-RealtimeActivity:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-  $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
-      $($.fn.dataTable.tables(true)).DataTable()
-          .columns.adjust();
-  });
-  
-let visibleColumnsIndexes = null;
-$('.datatable thead').on('input', '.search', function () {
-      let strict = $(this).attr('strict') || false
-      let value = strict && this.value ? "^" + this.value + "$" : this.value
+                        return
+                    }
 
-      let index = $(this).parent().index()
-      if (visibleColumnsIndexes !== null) {
-        index = visibleColumnsIndexes[index]
-      }
+                    if (confirm('{{ trans('global.areYouSure') }}')) {
+                        $.ajax({
+                            headers: {'x-csrf-token': _token},
+                            method: 'POST',
+                            url: config.url,
+                            data: {ids: ids, _method: 'DELETE'}
+                        })
+                            .done(function () {
+                                location.reload()
+                            })
+                    }
+                }
+            }
+            dtButtons.push(deleteButton)
+            @endcan
 
-      table
-        .column(index)
-        .search(value, strict)
-        .draw()
-  });
-table.on('column-visibility.dt', function(e, settings, column, state) {
-      visibleColumnsIndexes = []
-      table.columns(":visible").every(function(colIdx) {
-          visibleColumnsIndexes.push(colIdx);
-      });
-  })
-})
+            $.extend(true, $.fn.dataTable.defaults, {
+                orderCellsTop: true,
+                order: [[1, 'desc']],
+                pageLength: 10,
+            });
+            let table = $('.datatable-RealtimeActivity:not(.ajaxTable)').DataTable({buttons: dtButtons})
+            $('a[data-toggle="tab"]').on('shown.bs.tab click', function (e) {
+                $($.fn.dataTable.tables(true)).DataTable()
+                    .columns.adjust();
+            });
 
-</script>
+            let visibleColumnsIndexes = null;
+            $('.datatable thead').on('input', '.search', function () {
+                let strict = $(this).attr('strict') || false
+                let value = strict && this.value ? "^" + this.value + "$" : this.value
+
+                let index = $(this).parent().index()
+                if (visibleColumnsIndexes !== null) {
+                    index = visibleColumnsIndexes[index]
+                }
+
+                table
+                    .column(index)
+                    .search(value, strict)
+                    .draw()
+            });
+            table.on('column-visibility.dt', function (e, settings, column, state) {
+                visibleColumnsIndexes = []
+                table.columns(":visible").every(function (colIdx) {
+                    visibleColumnsIndexes.push(colIdx);
+                });
+            })
+        })
+
+    </script>
 @endsection

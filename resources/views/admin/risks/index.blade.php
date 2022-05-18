@@ -134,7 +134,7 @@
                     { data: 'risk_process', name: 'risk_process' },
                     { data: 'description', name: 'description' },
                     { data: 'type', name: 'type' },
-                    { data: 'actions', name: '{{ trans('global.actions') }}' }
+                    {data: 'actions', orderable: false}
                 ],
                 orderCellsTop: true,
                 order: [[ 1, 'desc' ]],

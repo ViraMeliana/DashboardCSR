@@ -1,180 +1,169 @@
-@extends('layouts.admin')
+@extends('layouts/contentLayoutMaster')
+
+@section('title', 'Realtime Activity')
+
+@section('vendor-style')
+    {{-- vendor css files --}}
+    <link rel="stylesheet" href="{{ asset(mix('vendors/css/forms/select/select2.min.css')) }}">
+
+@endsection
+
+@section('page-style')
+    {{-- Page Css files --}}
+@endsection
+
 @section('content')
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.edit') }} {{ trans('cruds.realtimeActivity.title_singular') }}
-    </div>
 
-    <div class="card-body">
-        <form method="POST" action="{{ route("admin.realtime-activities.update", [$realtimeActivity->id]) }}" enctype="multipart/form-data">
-            @method('PUT')
-            @csrf
-            <div class="form-group">
-                <label class="required" for="title">{{ trans('cruds.realtimeActivity.fields.title') }}</label>
-                <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $realtimeActivity->title) }}" required>
-                @if($errors->has('title'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('title') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.title_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="date">{{ trans('cruds.realtimeActivity.fields.date') }}</label>
-                <input class="form-control date {{ $errors->has('date') ? 'is-invalid' : '' }}" type="text" name="date" id="date" value="{{ old('date', $realtimeActivity->date) }}" required>
-                @if($errors->has('date'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('date') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.date_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required">{{ trans('cruds.realtimeActivity.fields.type') }}</label>
-                <select class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}" name="type" id="type" required>
-                    <option value disabled {{ old('type', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Models\RealtimeActivity::TYPE_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('type', $realtimeActivity->type) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('type'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('type') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.type_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="total">{{ trans('cruds.realtimeActivity.fields.total') }}</label>
-                <input class="form-control {{ $errors->has('total') ? 'is-invalid' : '' }}" type="number" name="total" id="total" value="{{ old('total', $realtimeActivity->total) }}" step="1" required>
-                @if($errors->has('total'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('total') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.total_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required">{{ trans('cruds.realtimeActivity.fields.location') }}</label>
-                <select class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}" name="location" id="location" required>
-                    <option value disabled {{ old('location', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Models\RealtimeActivity::LOCATION_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('location', $realtimeActivity->location) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('location'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('location') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.location_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label>{{ trans('cruds.realtimeActivity.fields.village') }}</label>
-                <select class="form-control {{ $errors->has('village') ? 'is-invalid' : '' }}" name="village" id="village">
-                    <option value disabled {{ old('village', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Models\RealtimeActivity::VILLAGE_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('village', $realtimeActivity->village) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('village'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('village') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.village_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label>{{ trans('cruds.realtimeActivity.fields.subdistrict') }}</label>
-                <select class="form-control {{ $errors->has('subdistrict') ? 'is-invalid' : '' }}" name="subdistrict" id="subdistrict">
-                    <option value disabled {{ old('subdistrict', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Models\RealtimeActivity::SUBDISTRICT_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('subdistrict', $realtimeActivity->subdistrict) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('subdistrict'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('subdistrict') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.subdistrict_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label>{{ trans('cruds.realtimeActivity.fields.district') }}</label>
-                <select class="form-control {{ $errors->has('district') ? 'is-invalid' : '' }}" name="district" id="district">
-                    <option value disabled {{ old('district', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Models\RealtimeActivity::DISTRICT_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('district', $realtimeActivity->district) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('district'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('district') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.district_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label>{{ trans('cruds.realtimeActivity.fields.province') }}</label>
-                <select class="form-control {{ $errors->has('province') ? 'is-invalid' : '' }}" name="province" id="province">
-                    <option value disabled {{ old('province', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Models\RealtimeActivity::PROVINCE_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('province', $realtimeActivity->province) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('province'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('province') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.province_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="receiver">{{ trans('cruds.realtimeActivity.fields.receiver') }}</label>
-                <input class="form-control {{ $errors->has('receiver') ? 'is-invalid' : '' }}" type="text" name="receiver" id="receiver" value="{{ old('receiver', $realtimeActivity->receiver) }}" required>
-                @if($errors->has('receiver'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('receiver') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.receiver_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="number_of_beneficiaries">{{ trans('cruds.realtimeActivity.fields.number_of_beneficiaries') }}</label>
-                <input class="form-control {{ $errors->has('number_of_beneficiaries') ? 'is-invalid' : '' }}" type="number" name="number_of_beneficiaries" id="number_of_beneficiaries" value="{{ old('number_of_beneficiaries', $realtimeActivity->number_of_beneficiaries) }}" step="1">
-                @if($errors->has('number_of_beneficiaries'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('number_of_beneficiaries') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.number_of_beneficiaries_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="photo">{{ trans('cruds.realtimeActivity.fields.photo') }}</label>
-                <div class="needsclick dropzone {{ $errors->has('photo') ? 'is-invalid' : '' }}" id="photo-dropzone">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        {{ trans('global.edit') }} {{ trans('cruds.realtimeActivity.title_singular') }}
+                    </h4>
                 </div>
-                @if($errors->has('photo'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('photo') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.photo_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-danger" type="submit">
-                    {{ trans('global.save') }}
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route("admin.realtime-activities.update", [$realtimeActivity->id]) }}" enctype="multipart/form-data">
 
+                        @method('PUT')
+                        @csrf
+                        <div class="row">
+                            <div class="form-group col-6">
+                            <label class="required" for="title">{{ trans('cruds.realtimeActivity.fields.title') }}</label>
+                            <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $realtimeActivity->title) }}" required>
+                            @if($errors->has('title'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('title') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.realtimeActivity.fields.title_helper') }}</span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="required" for="date">{{ trans('cruds.realtimeActivity.fields.date') }}</label>
+                            <input class="form-control date {{ $errors->has('date') ? 'is-invalid' : '' }}" type="text" name="date" id="date" value="{{ old('date', $realtimeActivity->date) }}" required>
+                            @if($errors->has('date'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('date') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.realtimeActivity.fields.date_helper') }}</span>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                    <label class="required" for="total">{{ trans('cruds.realtimeActivity.fields.total') }}</label>
+                                    <input class="form-control {{ $errors->has('total') ? 'is-invalid' : '' }}" type="number" name="total" id="total" value="{{ old('total', $realtimeActivity->total) }}" step="1" required>
+                                    @if($errors->has('total'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('total') }}
+                                        </div>
+                                    @endif
+                                    <span class="help-block">{{ trans('cruds.realtimeActivity.fields.total_helper') }}</span>
+                                </div>
+                            <div class="form-group col-6">
+                                <label class="required" for="quantity">{{ trans('cruds.realtimeActivity.fields.quantity') }}</label>
+                                <input class="form-control {{ $errors->has('quantity') ? 'is-invalid' : '' }}" type="number" name="quantity" id="quantity" value="{{ old('quantity', $realtimeActivity->quantity) }}" step="1" required>
+                                @if($errors->has('quantity'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('quantity') }}
+                                    </div>
+                                @endif
+                                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.quantity_helper') }}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-4">
+                            <label class="required">{{ trans('cruds.realtimeActivity.fields.type') }}</label>
+                            <select class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}" name="type" id="type" required>
+                                <option value disabled {{ old('type', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                                @foreach(App\Models\RealtimeActivity::TYPE_SELECT as $key => $label)
+                                    <option value="{{ $key }}" {{ old('type', $realtimeActivity->type) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('type'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('type') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.realtimeActivity.fields.type_helper') }}</span>
+                        </div>
+
+                        <div class="form-group col-4">
+                            <label class="required" for="receiver">{{ trans('cruds.realtimeActivity.fields.receiver') }}</label>
+                            <input class="form-control {{ $errors->has('receiver') ? 'is-invalid' : '' }}" type="text" name="receiver" id="receiver" value="{{ old('receiver', $realtimeActivity->receiver) }}" required>
+                            @if($errors->has('receiver'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('receiver') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.realtimeActivity.fields.receiver_helper') }}</span>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="number_of_beneficiaries">{{ trans('cruds.realtimeActivity.fields.number_of_beneficiaries') }}</label>
+                            <input class="form-control {{ $errors->has('number_of_beneficiaries') ? 'is-invalid' : '' }}" type="number" name="number_of_beneficiaries" id="number_of_beneficiaries" value="{{ old('number_of_beneficiaries', $realtimeActivity->number_of_beneficiaries) }}" step="1">
+                            @if($errors->has('number_of_beneficiaries'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('number_of_beneficiaries') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.realtimeActivity.fields.number_of_beneficiaries_helper') }}</span>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label class="location">{{ trans('cruds.realtimeActivity.fields.location') }}</label>
+                                <textarea class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}" type="text" name="location" id="location" required>{{ old('location', $realtimeActivity->location) }}</textarea>
+
+                                @if($errors->has('location'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('location') }}
+                                    </div>
+                                @endif
+                                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.location_helper') }}</span>
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="required" for="description">{{ trans('cruds.realtimeActivity.fields.description') }}</label>
+                                <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description" required>{{ old('description',$realtimeActivity->description) }}</textarea>
+                                @if($errors->has('description'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('description') }}
+                                    </div>
+                                @endif
+                                <span class="help-block">{{ trans('cruds.realtimeActivity.fields.description_helper') }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="photo">{{ trans('cruds.realtimeActivity.fields.photo') }}</label>
+                            <div class="needsclick dropzone {{ $errors->has('photo') ? 'is-invalid' : '' }}" id="photo-dropzone">
+                            </div>
+                            @if($errors->has('photo'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('photo') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.realtimeActivity.fields.photo_helper') }}</span>
+                        </div>
+
+                        <button class="btn btn-primary waves-effect waves-float waves-light" type="submit">Submit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 @endsection
 
-@section('scripts')
+
+@section('vendor-script')
+    {{-- vendor files --}}
+    <script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
+
+@endsection
+
+@section('page-script')
 <script>
     var uploadedPhotoMap = {}
 Dropzone.options.photoDropzone = {

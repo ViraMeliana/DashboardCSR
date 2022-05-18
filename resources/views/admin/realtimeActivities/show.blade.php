@@ -1,20 +1,16 @@
-@extends('layouts.admin')
+@extends('layouts/contentLayoutMaster')
+
 @section('content')
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.realtimeActivity.title') }}
-    </div>
+    <div class="card">
+        <div class="card-header">
+            {{ trans('global.show') }} {{ trans('cruds.realtimeActivity.title') }}
+        </div>
 
-    <div class="card-body">
-        <div class="form-group">
+        <div class="card-body">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.realtime-activities.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
-            </div>
-            <table class="table table-bordered table-striped">
-                <tbody>
+                <table class="table table-bordered table-striped">
+                    <tbody>
                     <tr>
                         <th>
                             {{ trans('cruds.realtimeActivity.fields.id') }}
@@ -49,6 +45,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.realtimeActivity.fields.quantity') }}
+                        </th>
+                        <td>
+                            {{ $realtimeActivity->quantity }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.realtimeActivity.fields.total') }}
                         </th>
                         <td>
@@ -60,39 +64,7 @@
                             {{ trans('cruds.realtimeActivity.fields.location') }}
                         </th>
                         <td>
-                            {{ App\Models\RealtimeActivity::LOCATION_SELECT[$realtimeActivity->location] ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.village') }}
-                        </th>
-                        <td>
-                            {{ App\Models\RealtimeActivity::VILLAGE_SELECT[$realtimeActivity->village] ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.subdistrict') }}
-                        </th>
-                        <td>
-                            {{ App\Models\RealtimeActivity::SUBDISTRICT_SELECT[$realtimeActivity->subdistrict] ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.district') }}
-                        </th>
-                        <td>
-                            {{ App\Models\RealtimeActivity::DISTRICT_SELECT[$realtimeActivity->district] ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.realtimeActivity.fields.province') }}
-                        </th>
-                        <td>
-                            {{ App\Models\RealtimeActivity::PROVINCE_SELECT[$realtimeActivity->province] ?? '' }}
+                            {{ $realtimeActivity->location }}
                         </td>
                     </tr>
                     <tr>
@@ -113,27 +85,37 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.realtimeActivity.fields.description') }}
+                        </th>
+                        <td>
+                            {{ $realtimeActivity->description }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.realtimeActivity.fields.photo') }}
                         </th>
                         <td>
                             @foreach($realtimeActivity->photo as $key => $media)
                                 <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
-                                    <img src="{{ $media->getUrl('thumb') }}">
+                                    <img src="{{ $media->getUrl('preview') }}">
                                 </a>
                             @endforeach
                         </td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="card-footer">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.realtime-activities.index') }}">
+                <a class="btn btn-primary" href="{{ route('admin.realtime-activities.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
+
         </div>
     </div>
-</div>
-
-
-
 @endsection

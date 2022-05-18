@@ -19,14 +19,14 @@ class RealtimeActivityController extends Controller
 
     public function index()
     {
-        $realtimeActivities = RealtimeActivity::with(['media'])->get();
-
-        return view('landing.activity', compact('realtimeActivities'));
+        $realtimeActivities = RealtimeActivity::with(['media'])->paginate(5);
+        $pageConfigs = ['pageHeader' => false];
+        return view('admin.realtimeActivities.index',['pageConfigs' => $pageConfigs], compact('realtimeActivities'));
     }
 
     public function create()
     {
-        return view('landing.createActivity');
+        return view('admin.realtimeActivities.create');
     }
 
     public function store(StoreRealtimeActivityRequest $request)
@@ -41,12 +41,12 @@ class RealtimeActivityController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $realtimeActivity->id]);
         }
 
-        return redirect()->route('landing.activity');
+        return redirect()->route('admin.realtime-activities.index');
     }
 
     public function edit(RealtimeActivity $realtimeActivity)
     {
-        return view('landing.createActivity', compact('realtimeActivity'));
+        return view('admin.realtimeActivities.edit', compact('realtimeActivity'));
     }
 
     public function update(UpdateRealtimeActivityRequest $request, RealtimeActivity $realtimeActivity)
@@ -67,7 +67,7 @@ class RealtimeActivityController extends Controller
             }
         }
 
-        return redirect()->route('landing.activity');
+        return redirect()->route('admin.realtime-activities.index');
     }
 
     public function show(RealtimeActivity $realtimeActivity)

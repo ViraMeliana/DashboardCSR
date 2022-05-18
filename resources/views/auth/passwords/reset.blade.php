@@ -16,18 +16,7 @@
         <div class="auth-inner row m-0">
             <!-- Brand logo-->
             <a class="brand-logo" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-affiliate"
-                     width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#7A6FF1" fill="none"
-                     stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275"/>
-                    <path d="M11.683 12.317l5.759 -5.759"/>
-                    <circle cx="5.5" cy="5.5" r="1.5"/>
-                    <circle cx="18.5" cy="5.5" r="1.5"/>
-                    <circle cx="18.5" cy="18.5" r="1.5"/>
-                    <circle cx="8.5" cy="15.5" r="4.5"/>
-                </svg>
-                <h2 class="brand-text text-primary ms-1">HcM</h2>
+                <img src="{{asset('landing-assets/images/logo/logo.png')}}" alt="logo">
             </a>
             <!-- /Brand logo-->
 
@@ -48,29 +37,57 @@
                 <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
                     <h2 class="card-title fw-bold mb-1">Reset Password 🔒</h2>
                     <p class="card-text mb-2">Your new password must be different from previously used passwords</p>
-                    <form class="auth-reset-password-form mt-2" action="/auth/login-cover" method="GET">
+                    <form class="auth-reset-password-form mt-2" method="POST" action="{{ route('password.request') }}">
+                        @csrf
+                        <input name="token" value="{{ $token }}" type="hidden">
+
+                        <div class="mb-1">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" id="email"
+                                   class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required
+                                   placeholder="{{ trans('global.login_email') }}" value="{{ old('email', null) }}"
+                                   aria-describedby="email"
+                                   tabindex="2">
+                            @if($errors->has('email'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('email') }}
+                                </div>
+                            @endif
+                        </div>
                         <div class="mb-1">
                             <div class="d-flex justify-content-between">
-                                <label class="form-label" for="reset-password-new">New Password</label>
+                                <label class="form-label" for="password">New Password</label>
                             </div>
                             <div class="input-group input-group-merge form-password-toggle">
-                                <input class="form-control form-control-merge" id="reset-password-new" type="password" name="reset-password-new" placeholder="············" aria-describedby="reset-password-new" autofocus="" tabindex="1" />
+                                <input type="password" name="password" id="password"
+                                       class="form-control form-control-merge {{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                       required placeholder="{{ trans('global.login_password') }}"
+                                       aria-describedby="password"
+                                       tabindex="3">
+                                @if($errors->has('password'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('password') }}
+                                    </div>
+                                @endif
                                 <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                             </div>
                         </div>
                         <div class="mb-1">
                             <div class="d-flex justify-content-between">
-                                <label class="form-label" for="reset-password-confirm">Confirm Password</label>
+                                <label class="form-label" for="password_confirmation">Confirm Password</label>
                             </div>
                             <div class="input-group input-group-merge form-password-toggle">
-                                <input class="form-control form-control-merge" id="reset-password-confirm" type="password" name="reset-password-confirm" placeholder="············" aria-describedby="reset-password-confirm" tabindex="2" />
+                                <input type="password" id="password_confirmation" name="password_confirmation"
+                                       class="form-control form-control-merge" required
+                                       placeholder="{{ trans('global.login_password_confirmation') }}"
+                                       aria-describedby="password_confirmation" tabindex="4">
                                 <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                             </div>
                         </div>
                         <button class="btn btn-primary w-100" tabindex="3">Set New Password</button>
                     </form>
                     <p class="text-center mt-2">
-                        <a href="{{url('auth/login-cover')}}">
+                        <a href="{{route('login')}}">
                             <i data-feather="chevron-left"></i> Back to login
                         </a>
                     </p>

@@ -133,7 +133,7 @@
                     { data: 'subject', name: 'subject' },
                     { data: 'description', name: 'description' },
                     { data: 'year', name: 'year' },
-                    { data: 'actions', name: '{{ trans('global.actions') }}' }
+                    {data: 'actions', orderable: false}
                 ],
                 orderCellsTop: true,
                 order: [[ 1, 'desc' ]],

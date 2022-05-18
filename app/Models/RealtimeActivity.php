@@ -54,6 +54,7 @@ class RealtimeActivity extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
+        $this->addMediaConversion('view')->fit('crop', 400, 400);
     }
 
     public function getDateAttribute($value)
@@ -73,6 +74,7 @@ class RealtimeActivity extends Model implements HasMedia
             $item->url = $item->getUrl();
             $item->thumbnail = $item->getUrl('thumb');
             $item->preview = $item->getUrl('preview');
+            $item->view = $item->getUrl('view');
         });
 
         return $files;

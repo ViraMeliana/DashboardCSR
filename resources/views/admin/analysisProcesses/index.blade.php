@@ -139,7 +139,7 @@
                     { data: 'method', name: 'methods.name' },
                     { data: 'supporting_process', name: 'supporting_processes.name' },
                     { data: 'date', name: 'date' },
-                    { data: 'actions', name: '{{ trans('global.actions') }}' }
+                    {data: 'actions', orderable: false}
                 ],
                 orderCellsTop: true,
                 order: [[ 1, 'desc' ]],

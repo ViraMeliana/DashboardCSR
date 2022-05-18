@@ -120,7 +120,7 @@
                 { data: 'id', name: 'id' },
                 { data: 'output', name: 'output' },
                 { data: 'analysis_process_date', name: 'analysis_process.date' },
-                { data: 'actions', name: '{{ trans('global.actions') }}' }
+                {data: 'actions', orderable: false}
             ],
             orderCellsTop: true,
             order: [[ 1, 'desc' ]],

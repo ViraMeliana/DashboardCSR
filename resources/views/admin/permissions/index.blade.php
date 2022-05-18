@@ -34,7 +34,7 @@
                         <h4 class="card-title">{{ trans('cruds.permission.title_singular') }} {{ trans('global.list') }} </h4>
                     </div>
                     <div class="card-datatable">
-                        <table class="table datatable ajaxTable datatable-Permission">
+                        <table class="table datatable ajaxTable table-responsive datatable-Permission">
                             <thead>
                             <tr>
                                 <th width="10">
@@ -100,7 +100,7 @@
                     {data: 'placeholder', name: 'placeholder'},
                     {data: 'id', name: 'id'},
                     {data: 'title', name: 'title'},
-                    {data: 'actions', name: '{{ trans('global.actions') }}', orderable: false}
+                    {data: 'actions', orderable: false}
                 ],
                 orderCellsTop: true,
                 order: [[2, 'asc']],

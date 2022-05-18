@@ -164,7 +164,7 @@
                     { data: 'email', name: 'email' },
                     { data: 'positions', name: 'positions.name' },
                     { data: 'roles', name: 'roles.title' },
-                    { data: 'actions', name: '{{ trans('global.actions') }}' }
+                    {data: 'actions', orderable: false}
                 ],
                 orderCellsTop: true,
                 order: [[ 1, 'desc' ]],

@@ -12,6 +12,13 @@
             "slug": "admin.home"
         },
         {
+            "url": "admin.realtime-activities.index",
+            "name": "cruds.realtimeActivity.title",
+            "permission": "realtime_activity_access",
+            "icon": "home",
+            "slug": "admin.realtime-activities.index"
+        },
+        {
             "navheader" : "Users",
             "permission": "users_header_access"
         },

@@ -142,7 +142,7 @@
                     { data: 'smap_implementation', name: 'smap_implementation' },
                     { data: 'self_smap_control', name: 'self_smap_control' },
                     { data: 'document_number', name: 'business_document.document_number' },
-                    { data: 'actions', name: '{{ trans('global.actions') }}' }
+                    {data: 'actions', orderable: false}
                 ],
                 orderCellsTop: true,
                 order: [[ 1, 'desc' ]],

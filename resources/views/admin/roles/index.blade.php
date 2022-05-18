@@ -123,7 +123,7 @@
                     { data: 'id', name: 'id' },
                     { data: 'title', name: 'title' },
                     { data: 'permissions', name: 'permissions.title' },
-                    { data: 'actions', name: '{{ trans('global.actions') }}' }
+                    {data: 'actions', orderable: false}
                 ],
                 orderCellsTop: true,
                 order: [[ 1, 'desc' ]],

@@ -138,7 +138,7 @@
                     { data: 'risk_level_target', name: 'risk_level_target' },
                     { data: 'personal_identification_name', name: 'personal_identification.name' },
                     { data: 'document_number', name: 'business_document.document_number'},
-                    { data: 'actions', name: '{{ trans('global.actions') }}' }
+                    {data: 'actions', orderable: false}
                 ],
                 orderCellsTop: true,
                 order: [[ 1, 'desc' ]],

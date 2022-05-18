@@ -126,7 +126,7 @@
                     { data: 'kpi', name: 'kpi' },
                     { data: 'target', name: 'target' },
                     { data: 'analysi_process_date', name: 'analysi_process.date' },
-                    { data: 'actions', name: '{{ trans('global.actions') }}' }
+                    {data: 'actions', orderable: false}
                 ],
                 orderCellsTop: true,
                 order: [[ 1, 'desc' ]],

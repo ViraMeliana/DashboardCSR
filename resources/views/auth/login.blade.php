@@ -16,18 +16,7 @@
         <div class="auth-inner row m-0">
             <!-- Brand logo-->
             <a class="brand-logo" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-affiliate"
-                     width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#7A6FF1" fill="none"
-                     stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275"/>
-                    <path d="M11.683 12.317l5.759 -5.759"/>
-                    <circle cx="5.5" cy="5.5" r="1.5"/>
-                    <circle cx="18.5" cy="5.5" r="1.5"/>
-                    <circle cx="18.5" cy="18.5" r="1.5"/>
-                    <circle cx="8.5" cy="15.5" r="4.5"/>
-                </svg>
-                <h2 class="brand-text text-primary ms-1">Dashboard CSR</h2>
+                <img src="{{asset('landing-assets/images/logo/logo.png')}}" alt="logo">
             </a>
             <!-- /Brand logo-->
 
@@ -57,9 +46,11 @@
                         <div class="mb-1">
                             <div class="d-flex justify-content-between">
                                 <label class="form-label" for="password">Password</label>
-                                <a href="{{url("auth/forgot-password-cover")}}">
-                                    <small>Forgot Password?</small>
-                                </a>
+                                @if(Route::has('password.request'))
+                                    <a href="{{route('password.request')}}">
+                                        <small>{{ trans('global.forgot_password') }}</small>
+                                    </a>
+                                @endif
                             </div>
                             <div class="input-group input-group-merge form-password-toggle">
                                 <input class="form-control form-control-merge" id="password" type="password" name="password" placeholder="············" aria-describedby="password" tabindex="2" />
@@ -68,15 +59,15 @@
                         </div>
                         <div class="mb-1">
                             <div class="form-check">
-                                <input class="form-check-input" id="remember-me" type="checkbox" tabindex="3" />
-                                <label class="form-check-label" for="remember-me"> Remember Me</label>
+                                <input class="form-check-input" type="remember" id="remember" name="remember" tabindex="3"/>
+                                <label class="form-check-label" for="remember"> {{ trans('global.remember_me') }} </label>
                             </div>
                         </div>
                         <button class="btn btn-primary w-100" tabindex="4">Sign in</button>
                     </form>
                     <p class="text-center mt-2">
                         <span>New on our platform?</span>
-                        <a href="{{url('auth/register')}}"><span>&nbsp;Create an account</span></a>
+                        <a href="{{url('register')}}"><span>&nbsp;Create an account</span></a>
                     </p>
                 </div>
             </div>

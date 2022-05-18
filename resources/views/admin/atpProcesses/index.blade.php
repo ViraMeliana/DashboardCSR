@@ -133,7 +133,7 @@
                     { data: 'description', name: 'description' },
                     { data: 'transaction', name: 'transaction' },
                     { data: 'project', name: 'project' },
-                    { data: 'actions', name: '{{ trans('global.actions') }}' }
+                    {data: 'actions', orderable: false}
                 ],
                 orderCellsTop: true,
                 order: [[ 1, 'desc' ]],

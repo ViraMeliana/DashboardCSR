@@ -84,9 +84,10 @@
                                     </span>
                                 </div>
                                 <span class="avatar">
-                                    <img class="round"
-                                       src="{{ Auth::user() ? Auth::user()->profile_photo_url : asset('images/portrait/small/avatar-s-11.jpg') }}"
-                                       alt="avatar" height="40" width="40">
+                                    <div class="avatar bg-primary">
+                                        <div class="avatar-content">{{ strtoupper(substr(auth()->user()->name, 0, 2)) }}</div>
+                                    </div>
+
                                     <span class="avatar-status-online"></span>
                                 </span>
                             </a>
@@ -94,7 +95,7 @@
                                 <h6 class="dropdown-header">Manage Profile</h6>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item"
-                                   href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0)' }}">
+                                   href="{{ route('profile.password.edit') }}">
                                     <i class="me-50" data-feather="user"></i> Profile
                                 </a>
                                 @if (Auth::check())
