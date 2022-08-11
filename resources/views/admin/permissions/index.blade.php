@@ -34,7 +34,7 @@
                         <h4 class="card-title">{{ trans('cruds.permission.title_singular') }} {{ trans('global.list') }} </h4>
                     </div>
                     <div class="card-datatable">
-                        <table class="table datatable ajaxTable table-responsive datatable-Permission">
+                        <table class="table datatable ajaxTable datatable-Permission">
                             <thead>
                             <tr>
                                 <th width="10">

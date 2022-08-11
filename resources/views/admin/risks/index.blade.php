@@ -39,7 +39,7 @@
                         </h4>
                     </div>
                     <div class="card-datatable">
-                        <table class="datatables-ajax table table-responsive datatable-Risk">
+                        <table class="datatables-ajax table datatable-Risk">
                             <thead>
                             <tr>
                                 <th width="10">
@@ -124,6 +124,7 @@
                 buttons: dtButtons,
                 processing: true,
                 serverSide: true,
+                dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
                 retrieve: true,
                 aaSorting: [],
                 ajax: "{{ route('admin.risks.index') }}",

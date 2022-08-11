@@ -11,6 +11,7 @@ class CreateTjslsTable extends Migration
         Schema::create('tjsls', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('periode')->nullable();
+            $table->string('category')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

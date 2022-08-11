@@ -32,7 +32,7 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class=" table table-bordered table-striped table-hover datatable datatable-Tjsl">
+                <table class="table table-bordered table-striped table-hover datatable datatable-Tjsl">
                     <thead>
                     <tr>
                         <th width="10">
@@ -43,6 +43,9 @@
                         </th>
                         <th>
                             {{ trans('cruds.tpb.fields.periode') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.tjsl.fields.category') }}
                         </th>
                         <th style="width: 20%">
                             &nbsp;
@@ -60,6 +63,9 @@
                             </td>
                             <td>
                                 {{ $tjsl->periode ?? '' }}
+                            </td>
+                            <td>
+                                {{ $tjsl->category ?? '' }}
                             </td>
                             <td>
                                 @can('tjsl_show')

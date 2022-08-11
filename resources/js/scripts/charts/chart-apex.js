@@ -21,7 +21,15 @@ $(function () {
         areaForm = $('#tjsl-statistic-form'),
         barChartEl = document.querySelector('#tjsl-statistics-bar-chart'),
         barCard = $('#tjsl-statistics-bar-chart'),
-        barForm = $('#tjsl-statistic-bar-form');
+        barForm = $('#tjsl-statistic-bar-form'),
+        barChartInsEl = document.querySelector('#tjsl-insidentil-bar-chart'),
+        barCardIns = $('#tjsl-insidentil-bar-chart'),
+        barFormIns = $('#tjsl-insidentil-bar-form');
+
+    var formatter = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+    });
 
     var areaChartConfig = {
         chart: {
@@ -55,6 +63,11 @@ $(function () {
             shared: false
         },
         yaxis: {
+            labels: {
+                formatter: function (value) {
+                    return formatter.format(value);
+                }
+            },
             opposite: isRtl
         }
     };
@@ -63,7 +76,6 @@ $(function () {
         chart: {
             height: 400,
             type: 'bar',
-            stacked: true,
             parentHeightOffset: 0,
             toolbar: {
                 show: false
@@ -75,10 +87,11 @@ $(function () {
         legend: {
             show: true,
             position: 'top',
-            horizontalAlign: 'start'
+            horizontalAlign: 'center'
         },
         stroke: {
             show: true,
+            width: 10,
             colors: ['transparent']
         },
         grid: {
@@ -94,6 +107,11 @@ $(function () {
             opacity: 1
         },
         yaxis: {
+            labels: {
+                formatter: function (value) {
+                    return formatter.format(value);
+                }
+            },
             opposite: isRtl
         }
     };
@@ -110,9 +128,19 @@ $(function () {
 
         chartFetch(barCard, barForm)
     }
+    if (typeof barChartInsEl !== undefined && barChartInsEl !== null) {
+        var barChartIns = new ApexCharts(barChartInsEl, barChartConfig)
+        barChartIns.render();
+
+        chartFetch(barCardIns, barFormIns)
+    }
 
     $('.tjsl-statistic-bar-filter').on('change', function () {
         chartFetch(barCard, barForm)
+    });
+
+    $('.tjsl-insidentil-bar-filter').on('change', function () {
+        chartFetch(barCardIns, barFormIns)
     });
 
     function chartUpdate(data) {
@@ -130,8 +158,27 @@ $(function () {
                 }
             }
             if (data.type === 'tjsl_statistic_bar_type') {
+                if (data.categories) {
+                    barChart.updateOptions({
+                        xaxis: {
+                            categories: data.categories
+                        }
+                    })
+                }
                 if (data.series) {
                     barChart.updateSeries(data.series)
+                }
+            }
+            if (data.type === 'tjsl_insidentil_bar_type') {
+                if (data.categories) {
+                    barChartIns.updateOptions({
+                        xaxis: {
+                            categories: data.categories
+                        }
+                    })
+                }
+                if (data.series) {
+                    barChartIns.updateSeries(data.series)
                 }
             }
         }

@@ -38,7 +38,7 @@
                         <h4 class="card-title">{{ trans('cruds.user.title_singular') }}  </h4>
                     </div>
                     <div class="card-datatable">
-                        <table class="datatables-ajax table table-responsive datatable-User">
+                        <table class="table datatable-User">
                             <thead>
                             <tr>
                                 <th width="10">
@@ -55,9 +55,6 @@
                                    Position
                                 </th>
                                 <th>
-                                    {{ trans('cruds.user.fields.email_verified_at') }}
-                                </th>
-                                <th>
                                     {{ trans('cruds.user.fields.roles') }}
                                 </th>
                                 <th>
@@ -70,21 +67,16 @@
                                 <td>
                                 </td>
                                 <td>
-                                    <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    <input class="form-control search" type="text" placeholder="{{ trans('global.search') }}">
                                 </td>
                                 <td>
-                                    <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    <input class="form-control search" type="text" placeholder="{{ trans('global.search') }}">
                                 </td>
                                 <td>
-                                    <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    <input class="form-control search" type="text" placeholder="{{ trans('global.search') }}">
                                 </td>
                                 <td>
-                                </td>
-                                <td>
-                                    <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                </td>
-                                <td>
-                                    <select class="search">
+                                    <select class="form-control search">
                                         <option value>{{ trans('global.all') }}</option>
                                         @foreach($roles as $key => $item)
                                             <option value="{{ $item->title }}">{{ $item->title }}</option>
@@ -154,6 +146,7 @@
                 buttons: dtButtons,
                 processing: true,
                 serverSide: true,
+                dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
                 retrieve: true,
                 aaSorting: [],
                 ajax: "{{ route('admin.users.index') }}",

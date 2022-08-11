@@ -8,6 +8,7 @@ use App\Http\Requests\StoreTjslRequest;
 use App\Http\Requests\UpdateTjslRequest;
 use App\Models\Pilar;
 use App\Models\Tjsl;
+use App\Models\TjslInsidentil;
 use App\Models\Tpb;
 use Carbon\Carbon;
 use Gate;
@@ -133,31 +134,91 @@ class TjslController extends Controller
                 $pilars = Pilar::all();
                 $temporary = null;
 
-                foreach ($pilars as $pilar) {
-                    $tjls = Tjsl::with('tpbs')->first();
+                foreach (Tjsl::TYPE_CATEGORY as $index => $category) {
+                    foreach ($pilars as $pilar) {
+                        $tjls = Tjsl::with('tpbs')->where('category', $index)->first();
 
-                    if ($request->year) {
-                        $tjls->whereYear('periode', Carbon::now()->year);
-                    } else {
-                        $tjls->orderByDesc('periode');
-                    }
+                        if ($tjls) {
+                            if ($request->year) {
+                                $tjls->whereYear('periode', Carbon::now()->year);
+                            } else {
+                                $tjls->orderByDesc('periode');
+                            }
 
-                    foreach ($tjls->tpbs as $item) {
-                        if ($pilar->id == $item->pilar_id) {
+                            foreach ($tjls->tpbs as $item) {
+                                if ($pilar->id == $item->pilar_id) {
 
-                            isset($temporary[$pilar->name]['rka']) ?
-                                $temporary[$pilar->name]['rka'] += (int)$item->rka :
-                                $temporary[$pilar->name]['rka'] = (int)$item->rka;
+                                    isset($temporary[$index][$pilar->name]['rka']) ?
+                                        $temporary[$index][$pilar->name]['rka'] += (int)$item->rka :
+                                        $temporary[$index][$pilar->name]['rka'] = (int)$item->rka;
 
-                            isset($temporary[$pilar->name]['realization']) ?
-                                $temporary[$pilar->name]['realization'] += (int)$item->realization :
-                                $temporary[$pilar->name]['realization'] = (int)$item->realization;
+                                    isset($temporary[$index][$pilar->name]['realization']) ?
+                                        $temporary[$index][$pilar->name]['realization'] += (int)$item->realization :
+                                        $temporary[$index][$pilar->name]['realization'] = (int)$item->realization;
+                                }
+                            }
+                        } else {
+                            $temporary[$index][$pilar->name]['rka'] = 0;
+                            $temporary[$index][$pilar->name]['realization'] = 0;
                         }
                     }
                 }
 
                 $rka = [];
                 $realization = [];
+
+                foreach ($temporary as $index => $value) {
+                    $rkaTotal = 0;
+                    $realizationTotal = 0;
+
+                    foreach ($value as $item) {
+                        $rkaTotal += $item['rka'];
+                        $realizationTotal += $item['realization'];
+                    }
+
+                    $rka[] = $rkaTotal;
+                    $realization[] = $realizationTotal;
+
+                    $result['categories'][] = $index;
+                }
+
+                $result['series'] = [
+                    [
+                        'name' => 'rka',
+                        'data' => $rka
+                    ],
+                    [
+                        'name' => 'realization',
+                        'data' => $realization
+                    ],
+                ];
+                $result['type'] = $request->chart_type;
+
+            } else if ($request->chart_type == 'tjsl_insidentil_bar_type') {
+                $temporary = null;
+
+                foreach (TjslInsidentil::TYPE_CATEGORY as $index => $category) {
+                    $tjlsInsidentil = TjslInsidentil::where('category', $index)->where('periode', $request->year)->get();
+
+                    if ($tjlsInsidentil->count() > 0) {
+                        foreach ($tjlsInsidentil as $it) {
+                            isset($temporary[$index]['rka']) ?
+                                $temporary[$index]['rka'] += (int)$it->rka :
+                                $temporary[$index]['rka'] = (int)$it->rka;
+
+                            isset($temporary[$index]['realization']) ?
+                                $temporary[$index]['realization'] += (int)$it->realization :
+                                $temporary[$index]['realization'] = (int)$it->realization;
+                        }
+                    } else {
+                        $temporary[$index]['rka'] = 0;
+                        $temporary[$index]['realization'] = 0;
+                    }
+                }
+
+                $rka = [];
+                $realization = [];
+
                 foreach ($temporary as $index => $value) {
                     $rka[] = $value['rka'];
                     $realization[] = $value['realization'];
@@ -168,7 +229,8 @@ class TjslController extends Controller
                 $result['series'] = [
                     [
                         'name' => 'rka',
-                        'data' => $rka],
+                        'data' => $rka
+                    ],
                     [
                         'name' => 'realization',
                         'data' => $realization
@@ -268,7 +330,7 @@ class TjslController extends Controller
                 $insertedId[] = $tpb->id;
             }
 
-            $tjsl = Tjsl::create(['periode' => $request->periode ?? Carbon::now()->format('Y-m-d')]);
+            $tjsl = Tjsl::create(['periode' => $request->periode ?? Carbon::now()->format('Y-m-d'), 'category' => $request->category ?? '']);
             $tjsl->tpbs()->sync($insertedId);
 
             File::delete($path);

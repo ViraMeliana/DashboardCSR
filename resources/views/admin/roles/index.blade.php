@@ -34,7 +34,7 @@
                         <h4 class="card-title">{{ trans('cruds.role.title_singular') }} {{ trans('global.list') }} </h4>
                     </div>
                     <div class="card-datatable">
-                        <table class="datatables-ajax table table-responsive datatable-Role">
+                        <table class="datatables-ajax table datatable-Role">
                             <thead>
                             <tr>
                                 <th width="10">
@@ -116,6 +116,7 @@
                 processing: true,
                 serverSide: true,
                 retrieve: true,
+                dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
                 aaSorting: [],
                 ajax: "{{ route('admin.roles.index') }}",
                 columns: [

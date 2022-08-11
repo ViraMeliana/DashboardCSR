@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use \DateTimeInterface;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Tjsl extends Model
+class TjslInsidentil extends Model
 {
     use SoftDeletes;
     use HasFactory;
 
-    public $table = 'tjsls';
+    public $table = 'tjsl_insidentils';
 
     public const TYPE_CATEGORY = [
         'sig' => 'SIG',
@@ -31,16 +31,15 @@ class Tjsl extends Model
 
     protected $fillable = [
         'periode',
+        'rka',
+        'cash_out',
+        'commited',
+        'realization',
         'category',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
-
-    public function tpbs()
-    {
-        return $this->belongsToMany(Tpb::class);
-    }
 
     protected function serializeDate(DateTimeInterface $date)
     {

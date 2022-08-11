@@ -33,7 +33,7 @@
                         <h4 class="card-title">{{ trans('cruds.supportingProcess.title_singular') }} {{ trans('global.list') }} </h4>
                     </div>
                     <div class="card-datatable">
-                        <table class="datatables-ajax table table-responsive datatable-SupportingProcess">
+                        <table class="datatables-ajax table datatable-SupportingProcess">
                             <thead>
                             <tr>
                                 <th width="10">
@@ -112,6 +112,7 @@
                 processing: true,
                 serverSide: true,
                 retrieve: true,
+                dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
                 aaSorting: [],
                 ajax: "{{ route('admin.supporting-processes.index') }}",
                 columns: [

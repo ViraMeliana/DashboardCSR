@@ -29,11 +29,34 @@
                             <div class="row mb-1">
                                 <div class="col-lg-12 col-md-12 mb-1 mb-sm-0">
                                     <label class="form-label" for="periode">Periode</label>
-                                    <input type="text" id="periode" name="periode" class="form-control flatpickr-basic" placeholder="Periode" />
+                                    <input type="text" id="periode" name="periode" class="form-control flatpickr-basic"
+                                           placeholder="Periode"/>
 
                                     @if($errors->has('periode'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('periode') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="row mb-1">
+                                <div class="col-lg-12 col-md-12 mb-1 mb-sm-0">
+                                    <label class="form-label" for="category">Category</label>
+                                    <select class="form-control {{ $errors->has('category') ? 'is-invalid' : '' }}"
+                                            name="category" id="category" required>
+                                        <option value
+                                                disabled {{ old('category', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+
+                                        @foreach(App\Models\Tjsl::TYPE_CATEGORY as $key => $label)
+                                            <option
+                                                value="{{ $key }}" {{ old('category', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if($errors->has('category'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('category') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -46,7 +69,8 @@
                                     </button>
                                 </div>
                                 <div class="col-lg-6 col-md-12 mb-1">
-                                    <a href="{{ asset(mix('data/template-tjsl.csv')) }}" class="btn btn-outline-primary w-100">
+                                    <a href="{{ asset(mix('data/template-tjsl.csv')) }}"
+                                       class="btn btn-outline-primary w-100">
                                         Download Template
                                     </a>
                                 </div>

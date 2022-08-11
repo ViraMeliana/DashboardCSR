@@ -559,6 +559,38 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 137,
                 'title' => 'social_media_schedule_delete',
             ],
+            [
+                'id'    => 138,
+                'title' => 'social_media_header_access',
+            ],
+            [
+                'id'    => 139,
+                'title' => 'smap_header_access',
+            ],
+            [
+                'id'    => 140,
+                'title' => 'tjsl_header_access',
+            ],
+            [
+                'id'    => 141,
+                'title' => 'tjsl_insidentil_access',
+            ],
+            [
+                'id'    => 142,
+                'title' => 'tjsl_insidentil_show',
+            ],
+            [
+                'id'    => 143,
+                'title' => 'tjsl_insidentil_delete',
+            ],
+            [
+                'id'    => 144,
+                'title' => 'tjsl_insidentil_create',
+            ],
+            [
+                'id'    => 145,
+                'title' => 'tjsl_insidentil_edit',
+            ],
         ];
 
         Permission::insert($permissions);

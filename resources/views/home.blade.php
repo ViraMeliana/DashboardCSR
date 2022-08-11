@@ -53,11 +53,79 @@
         </div>
 
         <div class="col-12">
+            <div class="card" id="tjsl-statistics-bar">
+                <div
+                    class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
+                    <div>
+                        <h4 class="card-title">Realisasi RKAP 1 Tahun</h4>
+                        <span
+                            class="card-subtitle text-muted">Detail statistik rkap dan real selamat setahun.</span>
+                    </div>
+
+                    <div class="align-items-center">
+                        <form data-action="{{ route('admin.tjsls.showChart') }}" id="tjsl-statistic-bar-form"
+                              class="tjsl-statistic-bar-form">
+                            @csrf
+                            <div class="row">
+                                <div class="col-12">
+                                    <select name="year" class="form-control tjsl-statistic-bar-filter">
+                                        @foreach($tjslYear as $index => $value)
+                                            <option value="{{ $value }}"> {{ $index }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="chart_type" value="tjsl_statistic_bar_type">
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="tjsl-statistics-bar-chart"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card" id="tjsl-insidentil-bar">
+                <div
+                    class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
+                    <div>
+                        <h4 class="card-title">Realisasi TJSL Insidentil 1 Tahun</h4>
+                        <span
+                            class="card-subtitle text-muted">Detail TJSL Insidentil tahunan.</span>
+                    </div>
+
+                    <div class="align-items-center">
+                        <form data-action="{{ route('admin.tjsls.showChart') }}" id="tjsl-insidentil-bar-form"
+                              class="tjsl-insidentil-bar-form">
+                            @csrf
+                            <div class="row">
+                                <div class="col-12">
+                                    <select name="year" class="form-control tjsl-insidentil-bar-filter">
+                                        @foreach($tjslInsidentilYear as $index => $value)
+                                            <option value="{{ $value }}"> {{ $index }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="chart_type" value="tjsl_insidentil_bar_type">
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="tjsl-insidentil-bar-chart"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
             <div class="card" id="tjsl-statistics">
                 <div
                     class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
                     <div>
-                        <h4 class="card-title">Statistik TJSL Tahunan</h4>
+                        <h4 class="card-title">Realisasi Anggaran TJSL SIG Group Per Pilar</h4>
                         <span
                             class="card-subtitle text-muted">Detail statistik produk bulanan selama setahun.</span>
                     </div>
@@ -73,45 +141,8 @@
                     <div id="tjsl-statistics-chart"></div>
                 </div>
             </div>
-
         </div>
 
-        <div class="col-6">
-            <div class="card" id="tjsl-statistics-bar">
-                <div class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
-                    <div>
-                        <h4 class="card-title">Statistik RKAP dan REAL</h4>
-                        <span
-                            class="card-subtitle text-muted">Detail statistik rkap dan real selamat setahun.</span>
-                    </div>
-
-                    <div class="align-items-center">
-                        <form data-action="{{ route('admin.tjsls.showChart') }}" id="tjsl-statistic-bar-form"
-                              class="tjsl-statistic-bar-form">
-                            @csrf
-                            <select name="year" class="form-control tjsl-statistic-bar-filter">
-                                @foreach($tjslYear as $index => $value)
-                                    <option value="{{ $value }}"> {{ $index }}</option>
-                                @endforeach
-                            </select>
-
-                            <input type="hidden" name="chart_type" value="tjsl_statistic_bar_type">
-                        </form>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div id="tjsl-statistics-bar-chart"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row match-height">
-            <!-- Pie Chart starts -->
-            <!-- Pie Chart ends -->
-
-            <!-- Donut Chart Starts-->
-            <!-- Donut Chart End -->
-        </div>
     </section>
     <!-- Dashboard Analytics end -->
 @endsection

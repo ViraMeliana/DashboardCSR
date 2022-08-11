@@ -138,6 +138,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('tjsls/show-cart', 'TjslController@showChart')->name('tjsls.showChart');
     Route::resource('tjsls', 'TjslController');
 
+    // Tjsl Insidentil
+    Route::resource('tjsl-insidentils', 'TjslInsidentilController');
+
     // Realtime Activity
     Route::delete('realtime-activities/destroy', 'RealtimeActivityController@massDestroy')->name('realtime-activities.massDestroy');
     Route::post('realtime-activities/media', 'RealtimeActivityController@storeMedia')->name('realtime-activities.storeMedia');
