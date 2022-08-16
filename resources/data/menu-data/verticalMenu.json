@@ -207,7 +207,7 @@
             "permission": "risk_access"
         },
         {
-            "navheader": "TJSL Managements",
+            "navheader": "Prosedur TJSL",
             "permission": "tjsl_header_access"
         },
         {
@@ -230,6 +230,13 @@
             "icon": "package",
             "slug": "admin.tjsl-insidentils.index",
             "permission": "tjsl_insidentil_access"
+        },
+        {
+            "url": "admin.work-instructions.index",
+            "name": "cruds.workInstruction.title",
+            "icon": "check",
+            "slug": "admin.work-instructions.index",
+            "permission": "work_instruction_access"
         }
     ]
 }

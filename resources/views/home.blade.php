@@ -91,7 +91,7 @@
                 <div
                     class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
                     <div>
-                        <h4 class="card-title">Realisasi TJSL Insidentil 1 Tahun</h4>
+                        <h4 class="card-title">Progres Pelaksanaan Program Insidentil</h4>
                         <span
                             class="card-subtitle text-muted">Detail TJSL Insidentil tahunan.</span>
                     </div>

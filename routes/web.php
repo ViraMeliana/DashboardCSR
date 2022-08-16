@@ -141,6 +141,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Tjsl Insidentil
     Route::resource('tjsl-insidentils', 'TjslInsidentilController');
 
+    // Tjsl Insidentil
+    Route::resource('work-instructions', 'WorkInstructionController');
+
     // Realtime Activity
     Route::delete('realtime-activities/destroy', 'RealtimeActivityController@massDestroy')->name('realtime-activities.massDestroy');
     Route::post('realtime-activities/media', 'RealtimeActivityController@storeMedia')->name('realtime-activities.storeMedia');

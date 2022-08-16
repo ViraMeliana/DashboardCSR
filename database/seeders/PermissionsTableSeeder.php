@@ -591,6 +591,26 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 145,
                 'title' => 'tjsl_insidentil_edit',
             ],
+            [
+                'id'    => 146,
+                'title' => 'work_instruction_access',
+            ],
+            [
+                'id'    => 147,
+                'title' => 'work_instruction_show',
+            ],
+            [
+                'id'    => 148,
+                'title' => 'work_instruction_delete',
+            ],
+            [
+                'id'    => 149,
+                'title' => 'work_instruction_create',
+            ],
+            [
+                'id'    => 150,
+                'title' => 'work_instruction_edit',
+            ],
         ];
 
         Permission::insert($permissions);
